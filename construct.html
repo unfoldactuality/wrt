@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Write</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,700;0,900;1,700;1,900&family=Newsreader:ital,wght@0,400;0,600;1,400&family=Manrope:wght@500;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #ffba38;
+            --primary-fixed: #ffdeac;
+            --on-primary: #432c00;
+            --surface: #16111f;
+            --surface-dim: #16111f;
+            --surface-container-lowest: #110b1a;
+            --surface-container-low: #1f1928;
+            --surface-container: #231d2c;
+            --surface-container-high: #2e2737;
+            --surface-container-highest: #393242;
+            --on-surface: #eadef4;
+            --on-surface-variant: #ccc4cf;
+            --outline: #958e99;
+            --outline-variant: #4a454e;
+            --tertiary: #b9ccb1;
+            --green: #00c853;
+            --font-headline: 'Noto Serif', serif;
+            --font-body: 'Newsreader', serif;
+            --font-label: 'Manrope', sans-serif;
+        }
+
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            font-family: var(--font-label);
+            color: var(--on-surface);
+            background: var(--surface);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* STARFIELD ANIMATION */
+        .stars, .stars-md {
+            position: absolute;
+            top: 0; left: 0;
+            border-radius: 50%;
+            background: transparent;
+            pointer-events: none;
+        }
+
+        .stars {
+            width: 1px; height: 1px;
+            box-shadow: 1425px 308px #fff, 187px 125px #fff, 913px 467px #fff, 1680px 82px #fff, 432px 391px #fff, 1102px 37px #fff, 761px 242px #fff;
+            animation: drift 150s linear infinite;
+        }
+
+        .stars-md {
+            width: 2px; height: 2px;
+            box-shadow: 1312px 178px #fff, 456px 445px #fff, 1789px 112px #fff, 623px 323px #fff;
+            animation: drift 100s linear infinite;
+        }
+
+        @keyframes drift {
+            from { transform: translateY(0); }
+            to   { transform: translateY(-600px); }
+        }
+
+        /* HEADER */
+        .header {
+            text-align: center;
+            padding: 80px 0 60px;
+            background: var(--surface-container-lowest);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header__title {
+            font-family: var(--font-headline);
+            font-size: clamp(1rem, 8vw, 2.5rem);
+            font-weight: 500;
+            font-style: bold;
+            color: var(--primary);
+            letter-spacing: -0.03em;
+            margin-bottom: 8px;
+        }
+
+        .header__subtitle {
+            font-family: var(--font-headline);
+            font-size: clamp(1rem, 5vw, 1.5rem);
+            color: var(--on-surface-variant);
+            font-style: italic;
+        }
+
+        /* NAVIGATION */
+        .tools-nav {
+            background: var(--surface-container-high);
+            border: 1px solid var(--outline-variant);
+            border-radius: 16px;
+            padding: 25px;
+            margin: 30px 0;
+        }
+
+        .nav-section {
+            margin-bottom: 20px;
+        }
+        
+        .nav-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .tools-nav h3 {
+            font-family: var(--font-label);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            color: var(--primary);
+            margin-bottom: 15px;
+            letter-spacing: 0.15em;
+            font-weight: 700;
+        }
+
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .nav-links a {
+            background: var(--surface-container);
+            color: var(--on-surface);
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            border: 1px solid var(--outline-variant);
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            border-color: var(--primary);
+            background: var(--surface-container-highest);
+        }
+
+        /* INPUT SECTIONS */
+        .input-section {
+            padding: 20px 0;
+            border-bottom: 1px solid var(--outline-variant);
+        }
+
+        .input-card {
+            background: var(--surface-container);
+            border: 1px solid var(--outline-variant);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 20px;
+            scroll-margin-top: 30px;
+        }
+
+        .input-label {
+            display: block;
+            font-family: var(--font-headline);
+            font-size: 1.2rem;
+            font-weight: 700;
+            font-style: italic;
+            margin-bottom: 12px;
+            color: var(--primary-fixed);
+        }
+
+        .main-textarea {
+            width: 100%;
+            min-height: 100px;
+            background: var(--surface-container-lowest);
+            border: 1px solid var(--outline-variant);
+            border-radius: 12px;
+            color: var(--on-surface);
+            padding: 15px;
+            font-family: var(--font-label);
+            font-size: 1rem;
+            resize: vertical;
+            overflow-y: hidden;
+        }
+
+        .main-textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        /* PROMPT CARDS */
+        .prompt-card {
+            background: var(--surface-container);
+            border: 1px solid var(--outline-variant);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 40px;
+            scroll-margin-top: 30px;
+        }
+
+        .prompt-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .prompt-number {
+            background: var(--primary);
+            color: var(--on-primary);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .prompt-title {
+            font-family: var(--font-headline);
+            font-size: 1.5rem;
+            font-weight: 700;
+            font-style: italic;
+        }
+
+        .prompt-textarea {
+            width: 100%;
+            min-height: 200px;
+            background: var(--surface-container-lowest);
+            border: 1px solid var(--outline-variant);
+            border-radius: 12px;
+            color: var(--on-surface);
+            padding: 20px;
+            font-family: var(--font-label);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            resize: vertical;
+            white-space: pre-wrap;
+            margin-bottom: 20px;
+        }
+
+        .copy-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--primary);
+            color: var(--on-primary);
+            border: none;
+            padding: 14px 28px;
+            border-radius: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .copy-button:hover {
+            background: var(--primary-fixed);
+            transform: scale(1.02);
+        }
+
+        .copy-button.copied {
+            background: var(--green);
+            color: #fff;
+        }
+
+        /* FOOTER */
+        .footer {
+            text-align: center;
+            padding: 60px 0;
+            border-top: 1px solid var(--outline-variant);
+            color: var(--on-surface-variant);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .header__title { font-size: 2.2rem; }
+            .prompt-card { padding: 20px; }
+            .prompt-textarea { min-height: 150px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="stars"></div>
+    <div class="stars-md"></div>
+
+    <header class="header">
+        <div class="container">
+            <h1 class="header__title">Write</h1>
+            <h2 class="header__subtitle">(own way)</h2>
+        </div>
+    </header>
+
+    <div class="container">
+        
+        <!-- NAVIGATION -->
+        <nav class="tools-nav">
+            <div class="nav-section">
+                <h3>Jump to Input Fields:</h3>
+                <div class="nav-links">
+                    <a href="#in1">Chapter Type</a>
+                    <a href="#in2">Chapter Name</a>
+                </div>
+            </div>
+            
+            <div class="nav-section">
+                <h3>Jump to Prompts:</h3>
+                <div class="nav-links">
+                    <a href="#p1">Home work</a>
+                    <a href="#p2">main prompt - বইয়ের আর্গুমেন্ট</a>
+                    <a href="#p3">ডেলিভারি</a>
+                    <a href="#p4">বইয়ের মূল প্রতিশ্রুতি</a>
+                    <a href="#p5">অধ্যায় প্রবাহ</a>
+                    <a href="#p6">শিরোনাম</a>
+                    <a href="#p7">উপ-শিরোনাম</a>
+                    <a href="#p8">উপ-শিরোনাম ব্যাখ্যা</a>
+                    <a href="#p9">edited অধ্যায়-প্রবাহ</a>
+                    <a href="#p10">edited শিরোনাম</a>
+                    <a href="#p11">অধ্যায় শেষের স্বাভাবিক প্রশ্ন</a>
+                    <a href="#p12">পর্ব</a>
+                    <a href="#p13">পর্ব Name</a>
+                    <a href="#p14">TOC</a>
+                    <a href="#p15">Chapter Description</a>
+                    <a href="#p16">Table</a>
+                    <a href="#p17">অধ্যায় প্রকৃতির ডিটেইলস</a>
+                    <a href="#p18">সিন বাই সিন আউটলাইন</a>
+                    <a href="#p19">চ্যাপ্টার টেমপ্লেট</a>
+                    <a href="#p20">চ্যাপ্টার ড্রাফট</a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- DYNAMIC INPUT FIELDS -->
+        <section class="input-section">
+            
+            <div class="input-card" id="in1">
+                <label class="input-label">Chapter Type:</label>
+                <textarea class="main-textarea dynamic-textarea">[Orientation]</textarea>
+            </div>
+
+            <div class="input-card" id="in2">
+                <label class="input-label">Chapter Name:</label>
+                <textarea class="main-textarea dynamic-textarea">[আপনি আসলে কী চান?]</textarea>
+            </div>
+
+        </section>
+
+        <!-- PROMPTS -->
+        
+        <!-- PROMPT 1 -->
+        <div class="prompt-card" id="p1">
+            <div class="prompt-header">
+                <div class="prompt-number">1</div>
+                <h2 class="prompt-title">Home work</h2>
+            </div>
+            <textarea class="prompt-textarea" style="min-height: 100px;" readonly>https://unfoldactuality.github.io/wrt/author-homework.html</textarea>
+            <button class="copy-button" onclick="copyPrompt(this)">Copy Prompt</button>
+        </div>
+
+        <!-- PROMPT 2 -->
+        <div class="prompt-card" id="p2">
+            <div class="prompt-header">
+                <div class="prompt-number">2</div>
+                <h2 class="prompt-title">main prompt - বইয়ের আর্গুমেন্ট</h2>
+            </div>
+            <textarea class="prompt-textarea" style="min-height: 450px;" readonly>আমি পাঠককে ধ্যান করার একটা প্রক্রিয়া শেখাতে চাই 
+শেখানোর জন্য পুরো একটা বই লিখতে চাই।
+এটা শেখানোর কারণ ওদের ভিতরে একটা ক্ষমতাকে জাগানো - যে ক্ষমতার বলে তাদের ভিতরে সূক্ষ্ম অনুভূতির গ্রহণ ক্ষমতা বাড়ে।
+তাদের ভিতরে সূক্ষ্ম অনুভূতির গ্রহণ ক্ষমতা বাড়ানোর কারণ হল - তাদের ভিতরে বিয়ন্ড ওয়ার্ল্ডলি সত্য ও নিয়মগুলোর সচেতনতা বাড়ানো।
+এই সচেতনতা বাড়ানোর কারণ হল এতে ওরা দৈনন্দিন জীবনে জাগতিক কাজে ও ডিসিসনে ভুল কম হওয়া ও ভুগতে কম হওয়া - যার আরেক অর্থ হল - সাফল্য ও আনন্দ বাড়বে 
+
+এটা বোঝার জন্য পাঠককে আগে underlying ruleটা বুঝতে হবে -
+মানুষ কিছু সত্যকে অগাহ্য করে কর্ম সিদ্ধান্ত নেয়, ও কাজ করে - সে সিদ্ধান্ত ও কর্মগুলো ভুল তাই তা তাদের জন্য ভুল বা প্রতিকূল কর্মফল দেয়
+মানুষ কেন নিজের অজান্তেই কিছু বিয়ন্ড ভিজিবিলিটি সত্যকে অগাহ্য করে 
+
+তারপর তাদেরকে বুঝতে হবে - ভুল সিদ্ধান্ত নেওয়ার underlying rule / process টা কি?
+
+মানুষের ভুল সিদ্ধান্তের পিছনে থাকে - ১, যে কাজে সে ভুল করছে সে কাজের প্রসেসের underlying rule সম্বন্ধে অসচেতনতা, ২, কর্মসিদ্ধান্তে ভুল থাকায় ভুল কর্ম করা ৩, underlying rule সম্বন্ধে অসচেতনতার কারণ হল বিয়ন্ড ভিজিবিলিটি বা তার নজরের বিয়ন্ড এক্সপিরিয়েন্সড সত্যকে তার কাউন্ট করতে না পারা, ৪, তার দ্বারা কৃত পুরোনো এক্টিভিটির ইমপ্রেশনগুলোর প্রভাব 
+
+TASK
+এই বইয়ের materials গুলে বিচার বিশ্লেষণ করে আমার এই proposed বইয়ের argument কোথায় দাঁড়িয়ে আছে তা নির্ধারণ করো।
+কোনও confusion বা question থাকলে তা আমাকে প্রশ্ন করে স্পষ্ট করে নাও।</textarea>
+            <button class="copy-button" onclick="copyPrompt(this)">Copy Prompt</button>
+        </div>
+
+        <!-- PROMPT 3 -->
+        <div class="prompt-card" id="p3">
+            <div class="prompt-header">
+                <div class="prompt-number">3</div>
+                <h2 class="prompt-title">ডেলিভারি</h2>
+            </div>
+            <textarea class="prompt-textarea" style="min-height: 100px;" readonly>বইটা কি ডেলিভার করবে? </textarea>
+            <button class="copy-button" onclick="copyPrompt(this)">Copy Prompt</button>
+        </div>
+
+        <!-- PROMPT 4 -->
+        <div class="prompt-card" id="p4">
+            <div class="prompt-header">
+                <div class="prompt-number">4</div>
+                <h2 class="prompt-title">বইয়ের মূল প্রতিশ্রুতি</h2>
+            </div>
+            <textarea class="prompt-textarea" style="min-height: 100px;" readonly>ডেলিভারির প্রমিস কি হবে? </textarea>
+            <button class="copy-button" onclick="copyPrompt(this)">Copy Prompt</button>
+        </div>
+
+        <!-- PROMPT 5 -->
+        <div class="prompt-card" id="p5">
+            <div class="prompt-header">
+                <div class="prompt-number">5</div>
+                <h2 class="prompt-title">অধ্যায় প্রবাহ</h2>
+            </div>
+            <textarea class="prompt-textarea" style="min-height: 100px;" readonly>বইয়ের অধ্যায় প্রবাহ</textarea>
+            <button class="copy-button" onclick="copyPrompt(this)">Copy Prompt</button>
+        </div>
+
+        <!-- PROMPT 6 -->
+        <div class="prompt-card" id="p6">
+            <div class="prompt-header">
+                <div class="prompt-number">6</div>
+                <h2 class="prompt-title">শিরোনাম</h2>
+            </div>
+            <textarea class="prompt-textarea" style="min-height: 100px;" readonly>বইটার টাইটেল কি হবে? </textarea>
+            <button class="copy-button" onclick="copyPrompt(this)">Copy Prompt</button>
+        </div>
+
+        <!-- PROMPT 7 -->
+        <div class="prompt-card" id="p7">
+            <div class="prompt-header">
+                <div class="prompt-number">7</div>
+                <h2 class="prompt-title">উপ-শিরোনাম</h2>
+            </div>
+            <textarea class="prompt-textarea" style="min-height: 100px;" readonly>প্রমিসটাকে আরও স্পষ্ট ও জোরদার করার জন্য সাব টাইটেল কি হবে?</textarea>
+            <button class="copy-button" onclick="copyPrompt(this)">Copy Prompt</button>
+        </div>
+
+        <!-- PROMPT 8 -->
+        <div class="prompt-card" id="p8">
+            <div class="prompt-header">
+                <div class="prompt-number">8</div>
+                <h2 class="prompt-title">উপ-শিরোনাম ব্যাখ্যা</h2>
+            </div>
+            <textarea class="prompt-textarea" style="min-height: 150px;" readonly>ভারতীয় সনাতন প্রজ্ঞা = credential
+আধুনিক জীবনের জন্য সহজ ও প্রয়োগযোগ্য এক পথ = reader's acceptance
+এই বইটির মূল প্রতিশ্রুতি এক বাক্যে লিখে দিন, যাতে পাঠকের আকাঙ্ক্ষা, সহজ প্রয়োগযোগ্যতা এবং ভারতীয় সনাতন প্রজ্ঞার উৎস—তিনটিই স্পষ্ট থাকে। </textarea>
+            <button class="copy-button" onclick="copyPrompt(this)">Copy Prompt</button>
+        </div>
+
+        <!-- PROMPT 9 -->
+        <div class="prompt-card" id="p9">
+            <div class="prompt-header">
+                <div class="prompt-number">9</div>
+                <h2 class="prompt-title">edited অধ্যায়-প্রবাহ</h2>
+            </div>
+            <textarea class="prompt-textarea" style="min-height: 150px;" readonly>এখন পর্যন্ত আবিষ্কৃত স্বাভাবিক যুক্তি অনুসরণ করে বইটির সম্ভাব্য অধ্যায়-প্রবাহ সাজিয়ে দিন—পাঠকের তৃষ্ণা থেকে ধ্যানের প্রয়োজনীয়তা এবং সেখান থেকে সাফল্য ও আনন্দে পৌঁছানো পর্যন্ত।</textarea>
+            <button class="copy-button" onclick="copyPrompt(this)">Copy Prompt</button>
+        </div>
+
+        <!-- PROMPT 10 -->
+        <div class="prompt-card" id="p10">
+            <div class="prompt-header">
+                <div class="prompt-number">10</div>
+                <h2 class="prompt-title">edited শিরোনাম</h2>
+            </div>
+            <textarea class="prompt-textarea" style="min-height: 150px;" readonly>উপরের সমস্ত অধ্যায় গুলোর নামকে আরও সংক্ষিপ্ত, স্মরণযোগ্য এবং বইয়ের বাণিজ্যিক positioning-এর উপযোগী করে পুনর্লিখুন। প্রতিটি নামের সঙ্গে এক লাইনের উদ্দেশ্য দিন。</textarea>
+            <button class="copy-button" onclick="copyPrompt(this)">Copy Prompt</button>
+        </div>
+
+        <!-- PROMPT 11 -->
+        <div class="prompt-card" id="p11">
+            <div class="prompt-header">
+                <div class="prompt-number">11</div>
+                <h2 class="prompt-title">অধ্যায় শেষের স্বাভাবিক প্রশ্ন</h2>
+            </div>
+            <textarea class="prompt-textarea" style="min-height: 150px;" readonly>উপরের অধ্যায়-প্রবাহের প্রতিটি অধ্যায়ের শেষে যে স্বাভাবিক প্রশ্নটি জন্ম নেবে, সেগুলো একসঙ্গে সাজিয়ে দিন, যাতে পুরো বইয়ের যুক্তিগত সেতু স্পষ্ট হয়।</textarea>
+            <button class="copy-button" onclick="copyPrompt(this)">Copy Prompt</button>
+        </div>
+
+        <!-- PROMPT 12 -->
+        <div class="prompt-card" id="p12">
+            <div class="prompt-header">
+                <div class="prompt-number">12</div>
+                <h2 class="prompt-title">পর্ব</h2>
+            </div>
+            <textarea class="prompt-textarea" style="min-height: 150px;" readonly>উপরের সমস্ত অধ্যায়কে কয়েকটি পর্বে ভাগ করে প্রতিটি পর্বের কেন্দ্রীয় প্রশ্ন, অন্তর্গত অধ্যায়গুলোর প্রশ্ন-উত্তর প্রবাহ এবং পর্বান্তের সেতুবাক্য লিখে দিন।</textarea>
+            <button class="copy-button" onclick="copyPrompt(this)">Copy Prompt</button>
+        </div>
+
+        <!-- PROMPT 13 -->
+        <div class="prompt-card" id="p13">
+            <div class="prompt-header">
+                <div class="prompt-number">13</div>
+                <h2 class="prompt-title">পর্ব Name</h2>
+            </div>
+            <textarea class="prompt-textarea" style="min-height: 150px;" readonly>চারটি পর্বের জন্য আরও শক্তিশালী নাম এবং প্রতিটি অধ্যায়ের চূড়ান্ত শিরোনাম প্রস্তাব করুন, যাতে প্রশ্নের প্রবাহ ও পাঠক-যাত্রা একসঙ্গে স্পষ্ট হয়।</textarea>
+            <button class="copy-button" onclick="copyPrompt(this)">Copy Prompt</button>
+        </div>
+
+        <!-- PROMPT 14 -->
+        <div class="prompt-card" id="p14">
+            <div class="prompt-header">
+                <div class="prompt-number">14</div>
+                <h2 class="prompt-title">TOC</h2>
+            </div>
+            <textarea class="prompt-textarea" style="min-height: 150px;" readonly>বইয়ের সমস্ত অধ্যায়ের শিরোনামকে একই ভাষাভঙ্গি ও ছন্দে সম্পাদনা করুন, যাতে প্রশ্নধর্মী ও বিবৃতিধর্মী শিরোনামের মধ্যে সামঞ্জস্য আসে এবং পুরো বইয়ের সূচিপত্র আরও সংহত শোনায়।</textarea>
+            <button class="copy-button" onclick="copyPrompt(this)">Copy Prompt</button>
+        </div>
+
+        <!-- PROMPT 15 -->
+        <div class="prompt-card" id="p15">
+            <div class="prompt-header">
+                <div class="prompt-number">15</div>
+                <h2 class="prompt-title">Chapter Description</h2>
+            </div>
+            <textarea class="prompt-textarea" style="min-height: 150px;" readonly>এই চূড়ান্ত সব অধ্যায়-শিরোনামের জন্য প্রতিটির নিচে এক লাইনের সংক্ষিপ্ত সারাংশ লিখুন, যাতে পাঠক-যাত্রা ও অধ্যায়ের উদ্দেশ্য স্পষ্ট হয়।</textarea>
+            <button class="copy-button" onclick="copyPrompt(this)">Copy Prompt</button>
+        </div>
+
+        <!-- PROMPT 16 -->
+        <div class="prompt-card" id="p16">
+            <div class="prompt-header">
+                <div class="prompt-number">16</div>
+                <h2 class="prompt-title">Table</h2>
+            </div>
+            <textarea class="prompt-textarea" style="min-height: 350px;" readonly>ম্যানুয়্যালি বইটা লেখার আগে ও লেখার সময় পুরো বইটার গঠনতন্ত্রটাকে একনজরে দেখে বুঝবার জন্য আমাকে একটা টেবল বানিয়ে দাও।
+টেবিলটার নাম = বইয়ের টাইটেল + বইয়ের সাব টাইটেল 
+টেবিলটার ডেসক্রিপশন = বইটির মূল প্রতিশ্রুতি এক বাক্যে
+এক একটা অধ্যায়র জন্য এক একটা রো রাখো। সেই টেবল-এ নীচের কলাম গুলো রাখো।
+অধ্যায়ের শিরোনাম 
+এক লাইনের সংক্ষিপ্ত সারাংশ, যাতে পাঠক-যাত্রা ও অধ্যায়ের উদ্দেশ্য স্পষ্ট হয়।
+এই অধ্যায়ের উদ্দেশ্য 
+এই অধ্যায়ের শেষে পাঠকের target transformation in this format(Name it ->): from -> to -> to
+আগের অধ্যায়ের সঙ্গে এই অধ্যায়ের যোগাযোগ 
+এই অধ্যায়ের শুরুর পয়েন্ট 
+পরের অধ্যায়ের সঙ্গে এই অধ্যায়ের সম্পর্ক বা যোগাযোগ 
+এই অধ্যায়ের শেষের সেতু বাক্য 
+এই অধ্যায়ের প্রকৃতি 
+কোন মেইন কোর টপিক এবং কোন কোন আদার মেইন টপিক এই অধ্যায়ে পাঠকের কাছে এই বইয়ে প্রথম বার ইন্ট্রোডিউস করা হবে? 
+অধ্যায়ের ভিতরে সেই টপিক গুলো ডিসকাস করার হায়ারকি কি হবে? কোন টপিকটা আগে কোন টপিকটা পরে কোন টপিকটা কোন টপিকটার আগে বা পরে - একটা টপিকের সাথে আর একটা টপিকের আন্তর্সম্পর্ক কি হবে? 
+এই অধ্যায়ে কোন কোন কনসেপ্ট / টার্মিনোলজি কোথায় কোথায় কিভাবে ইন্ট্রোডিউস করতে হবে? অধ্যায়ে কতটা জায়গা তারজন্য দিতে হবে ও কোন স্ট্রাকচারে দিতে হবে?</textarea>
+            <button class="copy-button" onclick="copyPrompt(this)">Copy Prompt</button>
+        </div>
+
+        <!-- PROMPT 17 -->
+        <div class="prompt-card" id="p17">
+            <div class="prompt-header">
+                <div class="prompt-number">17</div>
+                <h2 class="prompt-title">অধ্যায় প্রকৃতির ডিটেইলস</h2>
+            </div>
+            <textarea class="prompt-textarea" style="min-height: 150px;" readonly>[Orientation] প্রকৃতির অধ্যায় লেখার আদর্শ format কি?
+কোন কোন অধ্যায় এলিমেন্ট তাতে থাকে ও কোন chronology-তে থাকে?
+এর নিরিখে আমার প্রথম অধ্যায়ের জন্য Formula কি হওয়া উচিত?</textarea>
+            <button class="copy-button" onclick="copyPrompt(this)">Copy Prompt</button>
+        </div>
+
+        <!-- PROMPT 18 -->
+        <div class="prompt-card" id="p18">
+            <div class="prompt-header">
+                <div class="prompt-number">18</div>
+                <h2 class="prompt-title">সিন বাই সিন আউটলাইন</h2>
+            </div>
+            <textarea class="prompt-textarea" style="min-height: 150px;" readonly>“[আপনি আসলে কী চান?]” অধ্যায়ের জন্য একটি scene-by-scene outline তৈরি করুন, যেখানে প্রতিটি অংশের আনুমানিক কাজ, পাঠকের মানসিক পরিবর্তন, এবং পরের অংশে যাওয়ার সেতুবাক্য থাকবে।</textarea>
+            <button class="copy-button" onclick="copyPrompt(this)">Copy Prompt</button>
+        </div>
+
+        <!-- PROMPT 19 -->
+        <div class="prompt-card" id="p19">
+            <div class="prompt-header">
+                <div class="prompt-number">19</div>
+                <h2 class="prompt-title">চ্যাপ্টার টেমপ্লেট</h2>
+            </div>
+            <textarea class="prompt-textarea" style="min-height: 150px;" readonly>[Orientation]-প্রকৃতির অধ্যায়ের জন্য একটি পূর্ণ, পুনর্ব্যবহারযোগ্য chapter template তৈরি করুন—প্রতিটি element-এর উদ্দেশ্য, লেখার নির্দেশনা, এবং transition sentence-এর নমুনাসহ।</textarea>
+            <button class="copy-button" onclick="copyPrompt(this)">Copy Prompt</button>
+        </div>
+
+        <!-- PROMPT 20 -->
+        <div class="prompt-card" id="p20">
+            <div class="prompt-header">
+                <div class="prompt-number">20</div>
+                <h2 class="prompt-title">চ্যাপ্টার ড্রাফট</h2>
+            </div>
+            <textarea class="prompt-textarea" style="min-height: 200px;" readonly>উপরের [Orientation] chapter template অনুসরণ করে “[আপনি আসলে কী চান?]” অধ্যায়ের একটি পূর্ণ খসড়া লিখুন। প্রতিটি অংশে স্বাভাবিক গদ্য, পাঠকের মানসিক পরিবর্তন, এবং মসৃণ transition রাখুন।
+এই খসড়াটিকে “প্রথম অধ্যায়ের চূড়ান্ত সাহিত্যিক রূপ” হিসেবে নয়, বরং manuscript-এর জন্য একটি natural first draft হিসেবে রাখুন। যাতে লেখার সময় আমার নিজের উদাহরণ, অভিজ্ঞতা ও ভাষা ঢুকলে এটিই আরও ব্যক্তিগত ও জীবন্ত হবে。</textarea>
+            <button class="copy-button" onclick="copyPrompt(this)">Copy Prompt</button>
+        </div>
+
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            Copyright &copy; <script>document.write(new Date().getFullYear())</script> Siva Prasad Mukherjee. All Rights Reserved.
+        </div>
+    </footer>
+
+    <script>
+        // Multi-line Dynamic Auto-Resize Logic for Textareas
+        const tx = document.querySelectorAll(".dynamic-textarea");
+        for (let i = 0; i < tx.length; i++) {
+            tx[i].setAttribute("style", "height:" + (tx[i].scrollHeight) + "px;overflow-y:hidden;");
+            tx[i].addEventListener("input", OnInput, false);
+        }
+
+        function OnInput() {
+            this.style.height = "auto";
+            this.style.height = (this.scrollHeight) + "px";
+        }
+
+        // Copy Prompt Logic
+        function copyPrompt(button) {
+            const textarea = button.previousElementSibling;
+            textarea.select();
+            textarea.setSelectionRange(0, 99999);
+            
+            try {
+                document.execCommand('copy');
+                const originalText = button.innerHTML;
+                button.innerHTML = '&#10003; Copied!';
+                button.classList.add('copied');
+                
+                // Deselect Text
+                window.getSelection().removeAllRanges();
+
+                setTimeout(() => {
+                    button.innerHTML = originalText;
+                    button.classList.remove('copied');
+                }, 2000);
+            } catch (err) {
+                console.error('Copy failed', err);
+            }
+        }
+    </script>
+
+</body>
+</html>
