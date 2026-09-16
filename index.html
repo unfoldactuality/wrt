@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Author | Siva Prasad Mukherjee</title>
+    <link rel="icon" href="spm.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <!-- Scripts to disable context menu and shortcuts -->
+    <script type="text/javascript" language="javascript"> 
+      $(function () { 
+        $(this).bind("contextmenu", function (e) { 
+          e.preventDefault(); 
+        }); 
+      }); 
+    </script>
+    <script>
+      document.onkeydown = function(e) {
+        if (e.ctrlKey && (e.keyCode === 85)) { // Disable Ctrl+U
+            return false;
+        }
+      };
+    </script>
+
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      #top_bar {
+        width: 100%;
+        height: 38px;
+        background-color: #a00000;
+        color: white;
+        font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
+        font-size: 20px;
+        font-weight: bold;
+        text-align: center;
+        padding: 0px 0px;
+        border-bottom: 1px solid black;
+      }
+
+      .hero-image {
+        background-image: url("");
+        background-color: #363636; 
+        min-height: 100vh;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        position: relative;
+        overflow-x: hidden;
+      }
+
+      .hero-text {
+          text-align: center;
+          position: absolute;
+          color: #48cfad;
+          width: 100%;
+      }
+
+      p {
+        font-size: 20px;
+        margin-left: 15%;
+        margin-right: 15%;
+        color: #ffffff;
+      }
+
+      .button {
+        border: none;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        margin: 4px 2px;
+        cursor: pointer;
+        width: 50%;
+        font-size: 16px;
+        line-height: 1em;
+        font-weight: 700;
+        transition: all 0s ease;
+        color: rgb(255, 255, 255);
+        height: 54px;
+        border-radius: 5px;
+      }
+      
+      .buttonheadline1, .buttonheadline2, .buttonheadline3 {
+        font-size: 2em;
+        line-height: 1em;
+        font-weight: 700;
+        transition: all 0s ease;
+        color: rgb(255, 255, 255);
+        padding-top:15px;
+        padding-bottom:15px;
+        margin-right: 15%;
+        display: block;
+        margin-left: 15%;
+      }
+      
+      .buttonheadline1, .buttonheadline2 {
+        color: #ffffff;
+      }
+
+      .headinggap {
+          margin-top:15px;
+      }
+      
+      .button:hover {
+        transform: scale(1.1);
+      }
+
+      .button1 {
+          background-color: #48cfad;
+          color: #000000;
+      } 
+          
+      .button2 {
+          background-color: #48cfad;
+          color: #242424;
+      } 
+      
+      a {
+        color: #fff;
+      }
+      
+      h1 {
+        font-size: 40px;
+        margin-left: 15%;
+        margin-right: 15%;
+        color: #48cfad;
+      }
+      
+      .nothanks {
+          font-size: 21px;
+          line-height: 1em;
+          font-weight: 700;
+      }
+      .nothanks a {
+          color: #ffffff;
+      }
+      
+      .disclaimer {
+        width: 90%;
+        margin: 0px auto;
+      }
+      
+      @media only screen and (max-width: 600px) {
+          #top_bar {font-size: 16px; line-height: 16px;}
+          h1 {font-size: 25px;}
+          .button {
+              width: 95%;
+              font-size: 15px;
+          }
+          .video-embed {
+             width: 100% !important;
+             margin: 0 auto; 
+          }
+          .buttonheadline1, .buttonheadline2, .buttonheadline3 {
+            font-size: 1.4em;
+            padding-bottom: 0px;
+          }
+          .disclaimer {
+            font-size: 0.9em;
+          }
+      }
+    </style>
+</head>
+
+<body oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
+
+  <div class="hero-image">
+    <div style="padding-top: 30px"></div>
+    <div class="hero-text">
+      <h1>Author</h1> 
+          <p><button id="button1" class="button button1">of Siva Prasad Mukherjee</button></p>
+          <p><a href="author-homework.html" target="_blank"><button id="button1" class="button button1">Home Work</button></a></p>
+
+      <div style="padding-bottom: 50px"></div>
+      <footer class="footer">
+          <center><p>Copyright &copy; <script>document.write(new Date().getFullYear())</script> Siva Prasad Mukherjee. All Rights Reserved.</p></center>
+      </footer>
+    </div>
+  </div>
+
+</body>
+</html>
