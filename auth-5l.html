@@ -1,0 +1,1542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5 Lenses Manuscript Review</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,700;0,900;1,700;1,900&family=Newsreader:ital,wght@0,400;0,600;1,400&family=Manrope:wght@500;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #ffba38;
+            --primary-fixed: #ffdeac;
+            --on-primary: #432c00;
+            --surface: #16111f;
+            --surface-dim: #16111f;
+            --surface-container-lowest: #110b1a;
+            --surface-container-low: #1f1928;
+            --surface-container: #231d2c;
+            --surface-container-high: #2e2737;
+            --surface-container-highest: #393242;
+            --on-surface: #eadef4;
+            --on-surface-variant: #ccc4cf;
+            --outline: #958e99;
+            --outline-variant: #4a454e;
+            --tertiary: #b9ccb1;
+            --green: #00c853;
+            --font-headline: 'Noto Serif', serif;
+            --font-body: 'Newsreader', serif;
+            --font-label: 'Manrope', sans-serif;
+        }
+
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            font-family: var(--font-label);
+            color: var(--on-surface);
+            background: var(--surface);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* STARFIELD ANIMATION */
+        .stars, .stars-md {
+            position: absolute;
+            top: 0; left: 0;
+            border-radius: 50%;
+            background: transparent;
+            pointer-events: none;
+        }
+
+        .stars {
+            width: 1px; height: 1px;
+            box-shadow: 1425px 308px #fff, 187px 125px #fff, 913px 467px #fff, 1680px 82px #fff, 432px 391px #fff, 1102px 37px #fff, 761px 242px #fff;
+            animation: drift 150s linear infinite;
+        }
+
+        .stars-md {
+            width: 2px; height: 2px;
+            box-shadow: 1312px 178px #fff, 456px 445px #fff, 1789px 112px #fff, 623px 323px #fff;
+            animation: drift 100s linear infinite;
+        }
+
+        @keyframes drift {
+            from { transform: translateY(0); }
+            to   { transform: translateY(-600px); }
+        }
+
+        /* HEADER */
+        .header {
+            text-align: center;
+            padding: 80px 0 60px;
+            background: var(--surface-container-lowest);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header__title {
+            font-family: var(--font-headline);
+            font-size: clamp(1rem, 8vw, 2.5rem);
+            font-weight: 500;
+            font-style: bold;
+            color: var(--primary);
+            letter-spacing: -0.03em;
+            margin-bottom: 8px;
+        }
+
+        /* NAVIGATION */
+        .tools-nav {
+            background: var(--surface-container-high);
+            border: 1px solid var(--outline-variant);
+            border-radius: 16px;
+            padding: 25px;
+            margin: 30px 0;
+        }
+
+        .nav-section {
+            margin-bottom: 20px;
+        }
+        
+        .nav-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .tools-nav h3 {
+            font-family: var(--font-label);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            color: var(--primary);
+            margin-bottom: 15px;
+            letter-spacing: 0.15em;
+            font-weight: 700;
+        }
+
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .nav-links a {
+            background: var(--surface-container);
+            color: var(--on-surface);
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            border: 1px solid var(--outline-variant);
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            border-color: var(--primary);
+            background: var(--surface-container-highest);
+        }
+
+        /* INPUT SECTIONS */
+        .input-section {
+            padding: 20px 0;
+            border-bottom: 1px solid var(--outline-variant);
+        }
+
+        .input-card {
+            background: var(--surface-container);
+            border: 1px solid var(--outline-variant);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 20px;
+            scroll-margin-top: 30px;
+        }
+
+        .input-label {
+            display: block;
+            font-family: var(--font-headline);
+            font-size: 1.2rem;
+            font-weight: 700;
+            font-style: italic;
+            margin-bottom: 12px;
+            color: var(--primary-fixed);
+        }
+
+        .main-textarea {
+            width: 100%;
+            min-height: 100px;
+            background: var(--surface-container-lowest);
+            border: 1px solid var(--outline-variant);
+            border-radius: 12px;
+            color: var(--on-surface);
+            padding: 15px;
+            font-family: var(--font-label);
+            font-size: 1rem;
+            resize: vertical;
+            overflow-y: hidden;
+        }
+
+        .main-textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        /* PROMPT CARDS */
+        .prompt-card {
+            background: var(--surface-container);
+            border: 1px solid var(--outline-variant);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 40px;
+            scroll-margin-top: 30px;
+        }
+
+        .prompt-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .prompt-number {
+            background: var(--primary);
+            color: var(--on-primary);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .prompt-title {
+            font-family: var(--font-headline);
+            font-size: 1.5rem;
+            font-weight: 700;
+            font-style: italic;
+        }
+
+        .prompt-textarea {
+            width: 100%;
+            min-height: 600px;
+            background: var(--surface-container-lowest);
+            border: 1px solid var(--outline-variant);
+            border-radius: 12px;
+            color: var(--on-surface);
+            padding: 20px;
+            font-family: var(--font-label);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            resize: vertical;
+            white-space: pre-wrap;
+            margin-bottom: 20px;
+        }
+
+        .copy-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--primary);
+            color: var(--on-primary);
+            border: none;
+            padding: 14px 28px;
+            border-radius: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .copy-button:hover {
+            background: var(--primary-fixed);
+            transform: scale(1.02);
+        }
+
+        .copy-button.copied {
+            background: var(--green);
+            color: #fff;
+        }
+
+        /* FOOTER */
+        .footer {
+            text-align: center;
+            padding: 60px 0;
+            border-top: 1px solid var(--outline-variant);
+            color: var(--on-surface-variant);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .header__title { font-size: 2.2rem; }
+            .prompt-card { padding: 20px; }
+            .prompt-textarea { min-height: 300px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="stars"></div>
+    <div class="stars-md"></div>
+
+    <header class="header">
+        <div class="container">
+            <h1 class="header__title">5 Lenses Manuscript Review</h1>
+        </div>
+    </header>
+
+    <div class="container">
+        
+        <!-- NAVIGATION -->
+        <nav class="tools-nav">
+            <div class="nav-section">
+                <h3>Jump to Input Fields:</h3>
+                <div class="nav-links">
+                    <a href="#in1">CONTENT TO REVIEW</a>
+                </div>
+            </div>
+            
+            <div class="nav-section">
+                <h3>Jump to Prompts:</h3>
+                <div class="nav-links">
+                    <a href="#p1">5 Lenses Manuscript Review</a>
+                    <a href="#p2">Manuscript Editing Reference Map</a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- DYNAMIC INPUT FIELDS -->
+        <section class="input-section">
+            
+            <div class="input-card" id="in1">
+                <label class="input-label">CONTENT TO REVIEW:</label>
+                <textarea class="main-textarea dynamic-textarea" placeholder="[Paste the manuscript, chapter, section, or other content here]"></textarea>
+            </div>
+
+        </section>
+
+        <!-- PROMPTS -->
+        
+        <!-- PROMPT 1 -->
+        <div class="prompt-card" id="p1">
+            <div class="prompt-header">
+                <div class="prompt-number">1</div>
+                <h2 class="prompt-title">5 Lenses Manuscript Review</h2>
+            </div>
+            <textarea class="prompt-textarea" readonly>Review the content provided with this prompt through five complementary editorial lenses.
+
+The purpose of this review is to:
+
+1. Identify genuine problems or meaningful opportunities for improvement.
+2. Diagnose what kind of problem each observation represents.
+3. Explain why the issue matters.
+4. Recommend the direction of change.
+5. Check whether the content creates the understanding it needs to create in the reader.
+6. Check whether concepts appear in the right conceptual order and with the necessary dependencies.
+7. Protect the author's substantive intellectual content.
+
+This is a diagnostic review.
+
+Do not rewrite the content.
+
+Do not create a new version of the content.
+
+Do not introduce a new intellectual direction.
+
+Do not replace the author's ideas with your own.
+
+==================================================
+
+GOVERNING PRINCIPLE
+
+Structure is in service of the content, not content in service of the structure.
+
+The author's substantive content must be protected.
+
+Substantive authorial content may include:
+
+propositions
+
+arguments
+
+explanations
+
+interpretations
+
+conceptual distinctions
+
+principles
+
+reasoning
+
+examples
+
+analogies
+
+observations
+
+insights
+
+conclusions
+
+practical techniques
+
+philosophical or metaphysical claims
+
+Do not remove or dilute substantive content merely for:
+
+brevity
+
+symmetry
+
+neatness
+
+flow
+
+reader convenience
+
+compactness
+
+stylistic consistency
+
+If important content creates a structural problem, first consider whether the structure, sequence, placement, context, explanation, transition, or delivery should change so that the content works properly.
+
+Do not call content unnecessary until its function has been properly considered.
+
+==================================================
+
+INTENDED UNDERSTANDING CHECK
+
+For every important section, ask:
+
+What should the reader understand by the end of this section?
+
+Does the content actually create that understanding?
+
+Does the reader receive enough context?
+
+Is the explanation sufficient?
+
+Is the concept introduced at the right time?
+
+Is the sequence understandable?
+
+Does the reader understand why the idea matters?
+
+Can the reader explain the idea in their own words?
+
+Can the reader explain why it matters within the reasoning?
+
+Can the reader see its relationship with the previous and following ideas?
+
+Can the reader recognize or apply the idea in a new but related situation, when application is part of the intended understanding?
+
+Can the reader distinguish the idea from a nearby but different idea?
+
+Look for understanding gaps caused by:
+
+missing context
+
+insufficient explanation
+
+premature introduction of a concept
+
+late introduction of a necessary concept
+
+wrong sequence
+
+weak transition
+
+unclear distinction
+
+inadequate example
+
+over-compressed explanation
+
+unnecessary conceptual jump
+
+unclear expression
+
+missing implication
+
+missing connection between ideas
+
+Use this rule:
+
+Explain until the necessary understanding is achieved, not until everything the author knows has been said.
+
+Do not recommend expansion merely because more explanation is possible.
+
+Do not recommend shortening merely because an explanation is long.
+
+Judge explanation length by the understanding the reader needs to achieve.
+
+==================================================
+
+CONCEPTUAL DEPENDENCY CHECK
+
+For important concepts, ask:
+
+What does the reader need to know before understanding this?
+
+What concept does this idea depend upon?
+
+Has the prerequisite already been established?
+
+Is the dependent concept being introduced too early?
+
+Is it being introduced too late?
+
+Does the reader have enough context to understand why the concept appears here?
+
+Does the sequence follow the logic of the content?
+
+Does the reader have a natural reason to move from one concept to the next?
+
+If the content is sound but the position is wrong, diagnose it as a structural or content–structure problem rather than a content problem.
+
+==================================================
+
+LENS 1 — SEASONED WRITING EDITOR
+
+Examine the writing for:
+
+vague language
+
+generic statements
+
+clichés
+
+unnecessary repetition
+
+wordiness
+
+imprecision
+
+awkward expression
+
+weak sentences
+
+unclear references
+
+unnecessarily formal language
+
+artificial language
+
+mechanical phrasing
+
+poor rhythm
+
+sentences that obscure rather than clarify meaning
+
+Do not recommend substantive deletion merely to make the writing shorter.
+
+Distinguish between:
+
+language that is difficult because the idea itself is difficult
+
+language that is unnecessarily difficult because of poor expression
+
+==================================================
+
+LENS 2 — FIRST-TIME READER
+
+Read as a reader who has never seen the content before.
+
+Look for:
+
+confusion
+
+re-reading points
+
+missing context
+
+unfamiliar concepts
+
+insufficient explanation
+
+unexpected conceptual jumps
+
+unclear references
+
+writerly assumptions
+
+language that feels unnatural to the reader
+
+places where interest weakens
+
+places where the reader may ask:
+
+“Why am I being told this now?”
+
+“Why does this matter?”
+
+“What does this mean?”
+
+“How did we get here?”
+
+Compare intended understanding with actual reader understanding.
+
+When there is a gap, identify the likely cause.
+
+==================================================
+
+LENS 3 — KNOWLEDGEABLE READER
+
+Read as an informed and intellectually attentive reader.
+
+Look for:
+
+overly basic explanation
+
+obvious statements
+
+predictable reasoning
+
+insufficient intellectual value
+
+weak conceptual distinction
+
+unsupported conceptual leap
+
+places where greater precision is necessary
+
+places where an important distinction has been blurred
+
+places where the reasoning appears thinner than the surrounding argument
+
+Do not remove foundational explanation simply because a knowledgeable reader already knows it.
+
+Ask whether the foundation is necessary for the intended reader and for the reasoning that follows.
+
+==================================================
+
+LENS 4 — “SO WHAT?” LENS
+
+Examine the reader-value of the content.
+
+Ask:
+
+What does this information enable the reader to understand?
+
+What insight does it create?
+
+What changes in the reader's understanding?
+
+Why does this matter within the content?
+
+What is the implication?
+
+What is the practical or intellectual significance?
+
+Does the section merely provide information, or does it create understanding?
+
+Does a claim have an implication that has not been made sufficiently clear?
+
+Does an explanation lead naturally to a meaningful takeaway?
+
+Do not remove content merely because its value is not immediately obvious.
+
+First determine whether it serves as:
+
+foundation
+
+prerequisite
+
+argument support
+
+conceptual clarification
+
+distinction
+
+transition
+
+preparation for a later idea
+
+==================================================
+
+LENS 5 — READER JOURNEY
+
+Examine the movement of the reader through the content.
+
+Look for:
+
+weak opening
+
+unclear orientation
+
+detours
+
+circular movement
+
+unnecessary repetition
+
+abrupt transitions
+
+premature concepts
+
+insufficient preparation
+
+important ideas appearing too late
+
+weak development
+
+sudden conclusions
+
+disconnected endings
+
+missing bridges between ideas
+
+lack of a natural reason for the next idea
+
+Pay particular attention to:
+
+experience → question
+
+question → question
+
+question → need
+
+need → concept
+
+concept → explanation
+
+explanation → implication
+
+concept → concept
+
+section → section
+
+ending → next beginning
+
+Always distinguish between:
+
+content that is genuinely unnecessary
+
+content that is necessary but currently in the wrong place
+
+content that is necessary but insufficiently prepared
+
+content that is necessary but insufficiently explained
+
+==================================================
+
+PROBLEM TYPES
+
+Classify observations primarily as:
+
+Content Problem
+
+The content itself needs clarification, development, distinction, qualification, or improvement.
+
+Structure / Placement / Sequence Problem
+
+The content may be valid and useful, but its position, order, context, grouping, transition, or structural role is causing difficulty.
+
+Content–Structure Interaction Problem
+
+The content and structure interact in a way that creates a problem, but the solution should preserve the substantive content while improving how it is presented, positioned, connected, or explained.
+
+==================================================
+
+OBSERVATION FORMAT
+
+For every meaningful observation, provide:
+
+Priority
+
+Lens
+
+Problem Type
+
+Where
+
+Intended Understanding
+
+Actual Reader Understanding
+
+Problem
+
+Why It Matters
+
+Recommended Direction
+
+Use these priority levels:
+
+P1 — Must Fix
+
+A problem that significantly harms clarity, conceptual understanding, reasoning, reader orientation, reader journey, usefulness, depth, or the intended experience.
+
+P2 — Should Fix
+
+A noticeable weakness that reduces effectiveness but does not damage the core message.
+
+P3 — Nice to Fix
+
+A relatively minor issue involving wording, rhythm, small repetition, stylistic polish, or minor clarity.
+
+Do not inflate minor issues into P1 or P2.
+
+==================================================
+
+REVIEW DISCIPLINE
+
+Do not search for problems merely to produce a longer review.
+
+Do not duplicate the same problem under multiple lenses unless the lenses reveal genuinely different consequences.
+
+Prioritize substantive reader impact.
+
+Do not call important content unnecessary without first understanding its function.
+
+Before recommending removal, consider whether the issue can instead be solved through:
+
+relocation
+
+reordering
+
+better context
+
+better explanation
+
+better hierarchy
+
+stronger transition
+
+better introduction
+
+better distinction
+
+repetition management
+
+Do not sacrifice important content to solve a structural problem.
+
+Do not impose your own intellectual direction.
+
+Do not create new arguments.
+
+Do not introduce new substantive content.
+
+Do not rewrite the content.
+
+If the intended meaning is ambiguous and cannot be established reliably, flag the ambiguity rather than inventing an interpretation.
+
+Before recommending a change, consider whether the relevant content may have an important function later in the manuscript.
+
+==================================================
+
+FINAL DIAGNOSTIC SUMMARY
+
+After completing the five-lens review, provide:
+
+P1 — Must Fix
+
+P2 — Should Fix
+
+P3 — Nice to Fix
+
+Content Problems
+
+Structural / Placement / Sequence Problems
+
+Content–Structure Interaction Problems
+
+Intended Understanding Gaps
+
+Authorial Content at Risk
+
+Reader Journey Issues
+
+Conceptual Dependency / Sequence Issues
+
+Overall Diagnosis
+
+==================================================
+
+SUMMARY TABLE
+
+Provide a final table with:
+
+Lens
+
+কী identify করেছে
+
+Problem Type
+
+Priority
+
+Intended Understanding
+
+Actual Reader Issue
+
+কেন গুরুত্বপূর্ণ
+
+Recommended Direction
+
+==================================================
+
+FINAL RULE
+
+DETECT
+
+→ DIAGNOSE
+
+→ PRIORITIZE
+
+→ RECOMMEND
+
+Do not:
+
+REWRITE
+
+→ ADD NEW CONTENT
+
+→ CREATE A NEW STRUCTURE
+
+→ CHANGE THE AUTHOR'S INTELLECTUAL DIRECTION
+
+CONTENT TO REVIEW
+
+[Paste the manuscript, chapter, section, or other content here]</textarea>
+            <button class="copy-button" onclick="copyPrompt(this)">Copy Prompt</button>
+        </div>
+
+        <!-- PROMPT 2 -->
+        <div class="prompt-card" id="p2">
+            <div class="prompt-header">
+                <div class="prompt-number">2</div>
+                <h2 class="prompt-title">Manuscript Editing Reference Map</h2>
+            </div>
+            <textarea class="prompt-textarea" readonly>Using the 5 Lenses Manuscript Review you have just completed, convert the identified problems and recommendations into a practical Editing Reference Map.
+
+The purpose of this prompt is execution planning.
+
+The previous review already determined:
+
+what needs attention
+
+why it matters
+
+what type of problem it is
+
+the recommended direction of change
+
+Do not conduct a new independent review.
+
+Do not create a new editorial agenda.
+
+Do not introduce new criticism.
+
+Do not invent new recommendations.
+
+Do not introduce new substantive content.
+
+Do not create a new argument.
+
+Do not change the author's intellectual direction.
+
+==================================================
+
+CORE RELATIONSHIP
+
+The previous review answers:
+
+WHAT NEEDS ATTENTION?
+
+WHY DOES IT MATTER?
+
+WHAT DIRECTION OF CHANGE IS RECOMMENDED?
+
+This prompt answers:
+
+WHAT DOES THE WRITER NEED TO DO?
+
+HOW SHOULD THE WRITER APPROACH THE EDIT?
+
+WHAT MUST REMAIN PROTECTED?
+
+WHAT SHOULD BE VERIFIED AFTER EDITING?
+
+==================================================
+
+CONTENT AND DESIGN LOCK
+
+Protect the content's:
+
+Core Topic
+
+Purpose
+
+Structural Role
+
+Substantive Authorial Content
+
+Authorial Proposition
+
+Authorial Intellectual Direction
+
+Intended Reader Understanding
+
+Intended Reader Journey
+
+Do not change these merely because another structure, formulation, or presentation appears more convenient.
+
+The purpose of editing is to help the existing content realize its intended design more effectively.
+
+==================================================
+
+INTENDED UNDERSTANDING LOCK
+
+For each significant editing action, identify:
+
+Intended Understanding
+
+Current Gap
+
+Editing Action
+
+What Must Not Be Lost
+
+Verification
+
+After editing, verify:
+
+Has the intended understanding become clearer?
+
+Has necessary context been preserved?
+
+Has necessary explanation been preserved?
+
+Has the relationship with surrounding ideas become clearer?
+
+Has any important distinction been weakened?
+
+Has any necessary prerequisite been removed?
+
+Use this rule:
+
+Edit until the intended understanding is achieved, not until the section feels maximally complete.
+
+==================================================
+
+CONCEPTUAL DEPENDENCY LOCK
+
+If the review identifies:
+
+conceptual dependency problems
+
+premature concepts
+
+late concepts
+
+wrong sequence
+
+missing prerequisite
+
+missing context
+
+weak conceptual transition
+
+resolve these before language-level polishing.
+
+Use this order unless the previous review explicitly indicates otherwise:
+
+Conceptual Dependency / Placement
+
+→ Structure / Sequence
+
+→ Context / Introduction
+
+→ Explanation
+
+→ Transition
+
+→ Language / Polish
+
+Do not use sentence-level editing to hide a structural or conceptual problem.
+
+Use this rule:
+
+Do not polish a sentence before fixing the structure that makes the sentence necessary.
+
+==================================================
+
+EDITING ACTION MAP
+
+Convert every meaningful recommendation from the previous review into a clear editing action.
+
+Provide a table with:
+
+ক্রম
+
+কোথায়
+
+Review-এ চিহ্নিত সমস্যা
+
+কী Edit করতে হবে
+
+কীভাবে Edit করতে হবে
+
+কেন Edit করতে হবে
+
+কী অক্ষুণ্ণ রাখতে হবে
+
+Priority
+
+Status
+
+Possible action types include:
+
+Clarify
+
+Tighten
+
+Expand
+
+Reorder
+
+Relocate
+
+Introduce Context
+
+Strengthen Transition
+
+Reduce Repetition
+
+Deepen Explanation
+
+Sharpen Distinction
+
+Add Implication
+
+Improve Opening
+
+Improve Ending
+
+Improve Reader Orientation
+
+Language Refinement
+
+Remove Redundancy
+
+Protect / Preserve Authorial Content
+
+Verify
+
+Flag for Author Decision
+
+Use only the action types genuinely supported by the previous review.
+
+Do not create an action merely because it appears in the list.
+
+In “কীভাবে Edit করতে হবে”, provide direction and editing logic.
+
+Do not write replacement passages.
+
+Do not rewrite the manuscript.
+
+==================================================
+
+STRUCTURAL-FIRST EDITING
+
+When structural, conceptual, explanation, transition, and language problems occur together, prioritize them in this order:
+
+1. Conceptual Dependency / Placement
+
+2. Structure / Sequence
+
+3. Context / Introduction
+
+4. Explanation
+
+5. Transition
+
+6. Language / Polish
+
+If the previous review explicitly recommends a different order for a specific issue, follow that recommendation.
+
+Structure must remain in service of content.
+
+==================================================
+
+SECTION-BY-SECTION EDITING MAP
+
+For each section covered by the review, provide:
+
+Keep
+
+Change
+
+Add / Expand
+
+Move / Reorder
+
+Tighten / Reduce
+
+Clarify
+
+Transition
+
+Reader Understanding to Protect
+
+Conceptual Dependency to Protect
+
+Authorial Content to Protect
+
+Use “Keep” explicitly when important content should remain unchanged.
+
+Do not assume that every section requires editing.
+
+==================================================
+
+AUTHORIAL CONTENT PROTECTION MAP
+
+Identify substantive authorial content that must be protected during editing.
+
+For each important item, specify:
+
+Authorial Content
+
+Why It Matters
+
+What May Be Edited
+
+What Must Not Change
+
+Possible Structural Solution
+
+Verification Needed
+
+Before recommending removal or major compression of substantive content, consider whether the problem can instead be solved through:
+
+relocation
+
+better context
+
+better explanation
+
+hierarchy
+
+repetition management
+
+structural space
+
+clearer distinction
+
+stronger transition
+
+Only recommend removal when the previous review clearly supports it.
+
+==================================================
+
+READER JOURNEY EDITING MAP
+
+Translate the Reader Journey findings into editing actions.
+
+Check:
+
+Opening
+
+Reader Orientation
+
+Context
+
+Concept Preparation
+
+Question-to-Question Movement
+
+Concept-to-Concept Movement
+
+Explanation
+
+Transitions
+
+Repetition
+
+Important Idea Preparation
+
+Ending
+
+Natural Next Question
+
+For every action, explain:
+
+What reader movement is currently difficult?
+
+What editing action should improve it?
+
+What intended content must remain protected?
+
+Do not solve a journey problem by deleting important content merely to make the journey shorter.
+
+==================================================
+
+UNDERSTANDING-BASED EDITING MAP
+
+For every significant understanding gap, provide:
+
+Intended Understanding
+
+Current Gap
+
+Likely Cause
+
+Editing Action
+
+What Must Be Preserved
+
+Stop Condition
+
+The Stop Condition must describe when the writer should stop editing.
+
+Examples:
+
+The reader can explain the concept in their own words.
+
+The reader can explain why the concept matters.
+
+The reader can see the relationship with the preceding idea.
+
+The reader can see why the next idea follows.
+
+The necessary distinction is clear.
+
+The reader can recognize the concept in an appropriate situation.
+
+Do not recommend continuing to edit merely to make the section feel more polished.
+
+==================================================
+
+AUTHOR DECISION FLAGS
+
+Identify any point where editing requires a substantive authorial choice.
+
+Flag rather than decide when the choice concerns:
+
+meaning
+
+interpretation
+
+philosophical position
+
+argument direction
+
+degree of claim
+
+metaphysical claim
+
+important conceptual distinction
+
+removal of substantive content
+
+change in intended reader understanding
+
+change in chapter purpose
+
+change in intellectual direction
+
+For each such point provide:
+
+Author Decision Needed
+
+Issue
+
+Why the existing review does not provide enough basis to decide
+
+Possible Choices
+
+What the writer should decide
+
+Do not select the substantive choice yourself.
+
+==================================================
+
+FINAL EDITING SEQUENCE
+
+Create a practical numbered editing sequence based only on the recommendations in the previous review.
+
+Prioritize broadly in this order:
+
+P1 Structural / Conceptual
+
+→ P1 Understanding / Content
+
+→ P2 Structural / Content
+
+→ P2 Explanation / Transition
+
+→ P3 Language / Polish
+
+If the previous review indicates that another order is necessary, follow it.
+
+The sequence should allow the writer to begin editing immediately.
+
+==================================================
+
+EDITING INTEGRITY CHECK
+
+Before completing the Editing Reference Map, verify:
+
+Have all meaningful recommendations from the previous review been converted into actions?
+
+Has any important recommendation been omitted?
+
+Have any new criticisms been introduced?
+
+Has any new editorial agenda been introduced?
+
+Has the Core Topic remained unchanged?
+
+Has the Intended Reader Understanding remained unchanged?
+
+Has substantive authorial content remained protected?
+
+Have conceptual dependencies been preserved?
+
+Have structural problems been separated from content problems?
+
+Has structure remained in service of content?
+
+Has language polishing been prevented from masking structural problems?
+
+Has necessary explanation been protected?
+
+Has ambiguity been flagged rather than silently resolved?
+
+Can the writer now use this map as a practical editing guide?
+
+==================================================
+
+FINAL CONSOLIDATED EDITING TABLE
+
+Provide one final consolidated table with:
+
+ক্রম
+
+কোথায়
+
+কী সমস্যা
+
+কী Edit করতে হবে
+
+Edit-এর ধরন
+
+কেন করতে হবে
+
+Intended Understanding to Protect
+
+কী অক্ষুণ্ণ রাখতে হবে
+
+Priority
+
+Status
+
+Use these status values:
+
+☐ Not Started
+
+☐ In Progress
+
+✓ Done
+
+==================================================
+
+FINAL RULE
+
+This prompt converts diagnosis into execution.
+
+It does not perform a new review.
+
+It does not rewrite the manuscript.
+
+It does not add new content.
+
+It does not create a new argument.
+
+It does not change the author's intellectual direction.
+
+It does not change the intended reader understanding.
+
+Its sole purpose is:
+
+5-Lens Diagnosis
+
+→ Editing Actions
+
+→ Protection Requirements
+
+→ Verification Conditions
+
+→ Practical Editing Sequence
+
+Final principle:
+
+Edit the manuscript to better realize its intended design, not to replace that design with a new one.</textarea>
+            <button class="copy-button" onclick="copyPrompt(this)">Copy Prompt</button>
+        </div>
+
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            Copyright &copy; <script>document.write(new Date().getFullYear())</script> Siva Prasad Mukherjee. All Rights Reserved.
+        </div>
+    </footer>
+
+    <script>
+        // Multi-line Dynamic Auto-Resize Logic for Textareas
+        const tx = document.querySelectorAll(".dynamic-textarea");
+        for (let i = 0; i < tx.length; i++) {
+            tx[i].setAttribute("style", "height:" + (tx[i].scrollHeight) + "px;overflow-y:hidden;");
+            tx[i].addEventListener("input", OnInput, false);
+        }
+
+        function OnInput() {
+            this.style.height = "auto";
+            this.style.height = (this.scrollHeight) + "px";
+        }
+
+        // Copy Prompt Logic
+        function copyPrompt(button) {
+            const textarea = button.previousElementSibling;
+            textarea.select();
+            textarea.setSelectionRange(0, 99999);
+            
+            try {
+                document.execCommand('copy');
+                const originalText = button.innerHTML;
+                button.innerHTML = '&#10003; Copied!';
+                button.classList.add('copied');
+                
+                // Deselect Text
+                window.getSelection().removeAllRanges();
+
+                setTimeout(() => {
+                    button.innerHTML = originalText;
+                    button.classList.remove('copied');
+                }, 2000);
+            } catch (err) {
+                console.error('Copy failed', err);
+            }
+        }
+    </script>
+
+</body>
+</html>
