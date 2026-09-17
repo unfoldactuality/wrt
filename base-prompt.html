@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Universal Harmony — কর্ম বিশ্লেষণ Prompt Genie</title>
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+    margin:0;
+    background:#16111f;
+    color:#eadef4;
+    font-family:"Noto Sans Bengali","Nirmala UI","Segoe UI",sans-serif;
+    line-height:1.7;
+    overflow-x:hidden;
+}
+.container{
+    width:100%;
+    max-width:960px;
+    margin:0 auto;
+    padding:0 16px;
+}
+.header{
+    text-align:center;
+    padding:58px 0 42px;
+    background:#110b1a;
+}
+h1{
+    margin:0 0 8px;
+    color:#ffba38;
+    font-size:clamp(1.55rem,7vw,2.55rem);
+    line-height:1.25;
+}
+.subtitle{
+    margin:0;
+    color:#ccc4cf;
+    font-size:clamp(.95rem,4vw,1.2rem);
+}
+.card{
+    background:#231d2c;
+    border:1px solid #4a454e;
+    border-radius:16px;
+    padding:24px;
+    margin:24px 0;
+}
+.input-label{
+    display:block;
+    color:#ffdeac;
+    font-weight:700;
+    font-size:1.05rem;
+    margin-bottom:10px;
+}
+textarea{
+    width:100%;
+    border:1px solid #4a454e;
+    border-radius:12px;
+    background:#110b1a;
+    color:#eadef4;
+    padding:15px;
+    font:inherit;
+    line-height:1.65;
+    outline:none;
+}
+textarea:focus{border-color:#ffba38}
+#activity{
+    min-height:105px;
+    resize:vertical;
+}
+.prompt-card{padding:24px}
+.prompt-title{
+    margin:0 0 18px;
+    color:#ffdeac;
+    font-size:1.25rem;
+}
+.prompt-box{
+    min-height:650px;
+    resize:vertical;
+    white-space:pre-wrap;
+}
+.copy-button{
+    margin-top:16px;
+    border:0;
+    border-radius:11px;
+    padding:13px 22px;
+    background:#ffba38;
+    color:#432c00;
+    font:700 1rem "Noto Sans Bengali","Nirmala UI","Segoe UI",sans-serif;
+    cursor:pointer;
+}
+.copy-button:active{transform:scale(.98)}
+.copy-button.copied{background:#00c853;color:#fff}
+.footer{
+    text-align:center;
+    color:#958e99;
+    font-size:.85rem;
+    padding:35px 0 45px;
+    border-top:1px solid #4a454e;
+}
+@media(max-width:600px){
+    .container{padding:0 11px}
+    .header{padding:42px 0 30px}
+    .card{padding:17px 13px;border-radius:12px;margin:16px 0}
+    .prompt-box{min-height:900px;font-size:.91rem}
+    .copy-button{width:100%}
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+    <div class="container">
+        <h1>UNIVERSAL HARMONY</h1>
+        <p class="subtitle">আলোচ্য কর্মকান্ডের বিশ্লেষণ</p>
+    </div>
+</header>
+
+<main class="container">
+
+    <section class="card">
+        <label class="input-label" for="activity">আলোচ্য কর্ম বা কর্মকান্ড</label>
+        <textarea id="activity" placeholder="এখানে আপনার আলোচ্য কর্ম বা কর্মকান্ড লিখুন"></textarea>
+    </section>
+
+    <section class="card prompt-card">
+        <h2 class="prompt-title">Optimized Analysis Prompt</h2>
+        <textarea id="prompt" class="prompt-box" readonly></textarea>
+        <button class="copy-button" id="copyBtn" onclick="copyPrompt()">Copy Prompt</button>
+    </section>
+
+</main>
+
+<footer class="footer">
+    Copyright &copy; <script>document.write(new Date().getFullYear())</script> Siva Prasad Mukherjee. All Rights Reserved.
+</footer>
+
+<script>
+const activity = document.getElementById("activity");
+const promptBox = document.getElementById("prompt");
+const copyBtn = document.getElementById("copyBtn");
+
+const template = `আলোচ্য কর্ম বা কর্মকান্ড: [আলোচ্য কর্ম বা কর্মকান্ড]
+
+নিচের Table-টি ব্যবহার করে উপরে দেওয়া “আলোচ্য কর্ম বা কর্মকান্ড”-কে Universal self-balancing Tantra-এর operating model-এর পরিপ্রেক্ষিতে বিশ্লেষণ করো।
+
+Table-এর তিনটি column-এর ভূমিকা আলাদা এবং তা কঠোরভাবে অনুসরণ করতে হবে:
+
+প্রথম কলাম = GUIDELINE
+প্রথম কলামে দেওয়া সংজ্ঞাগুলো বিশ্লেষণের guideline। এগুলো পরিবর্তন, পুনর্লিখন, সংক্ষিপ্ত করা বা বাদ দেওয়া যাবে না।
+
+দ্বিতীয় কলাম = APPLICATION TO THE DISCUSSED ACTIVITY
+প্রথম কলামের প্রতিটি guideline-এর ভিত্তিতে উপরে দেওয়া “আলোচ্য কর্ম বা কর্মকান্ড”-এর ক্ষেত্রে তার প্রাসঙ্গিক প্রয়োগ বিশ্লেষণ করে এই কলামটি পূরণ করবে।
+
+তৃতীয় কলাম = FIXED UNIVERSAL REFERENCE
+তৃতীয় কলামের content reference হিসেবে fixed। এটি পরিবর্তন, পুনর্লিখন, সংক্ষিপ্ত করা, ব্যাখ্যা করে বদলে দেওয়া বা নতুন content যোগ করা যাবে না।
+
+Table:
+
+| Guideline / বিশ্লেষণের ভিত্তি | আলোচ্য কর্ম বা কর্মকান্ডের ক্ষেত্রে প্রয়োগ | বিশ্ব-চরাচরের Fixed Reference |
+| :--- | :--- | :--- |
+| Tantra (তন্ত্র): এমন একটি self-balancing system বা ব্যবস্থা, যা নিজের অন্তর্নিহিত operation-এর মাধ্যমে balance বজায় রাখে এবং imbalance হলে তা correct বা reset করার দিকে কাজ করে। | | |
+| Structure (গঠন): কোনো system বা Tantra-এর অন্তর্নিহিত গঠন—যে গঠনের মধ্যে তার বিভিন্ন দিক ও operation সংগঠিত থাকে। | | |
+| Power (শক্তি): কোনো Tantra বা system-কে পরিচালিত ও কার্যকর করার অন্তর্নিহিত শক্তি বা ক্ষমতা। | | |
+| Operational Rule (কার্যকরী নিয়ম): কোনো system কীভাবে operate করবে এবং তার operation কীভাবে স্বয়ংক্রিয়ভাবে এগোবে—তার অন্তর্নিহিত নিয়ম। | | |
+| Driving Mechanism (চালিকা প্রক্রিয়া): যে mechanism কোনো system-এর operation-কে চালিত করে এবং তার বিভিন্ন process-কে এগিয়ে নিয়ে যায়। | | |
+| Purpose (উদ্দেশ্য): কোনো system বা Tantra-এর fundamental direction বা যে দিকে তার operation স্বাভাবিকভাবে কাজ করে। | | Universal self-balancing Tantra/Power-এর ক্ষেত্রে সেই fundamental purpose হল Universal Harmony। |
+| Imbalance (ভারসাম্যহীনতা): কোনো system বা Tantra-এর স্বাভাবিক balance নষ্ট হওয়ার অবস্থা। | | |
+| Resetting Effect / প্রত্যাঘাত: Universal Harmony-তে imbalance তৈরি হলে বিশ্বচরাচরের self-balancing Tantra-এর corrective operation-এর ফলে যে consequence, resistance, loss, disruption বা পুনর্বিন্যাস ঘটে। | | Universal Harmony (সার্বজনীন সাম্য): Universal self-balancing system-এর সেই fundamental balanced state, যাকে বজায় রাখা বা পুনঃপ্রতিষ্ঠার দিকে system-এর operation কাজ করে। |
+
+বিশ্লেষণের নিয়ম:
+
+১. প্রথম কলামের guideline-কে প্রশ্ন বা analytical lens হিসেবে ব্যবহার করো।
+
+২. প্রতিটি row-তে শুধু “আলোচ্য কর্ম বা কর্মকান্ড”-এর ক্ষেত্রে প্রযোজ্য analysis দ্বিতীয় কলামে দাও।
+
+৩. আলোচ্য কর্মকান্ডের বাস্তব nature, তার operation এবং তার সম্ভাব্য consequence-এর সঙ্গে guideline-এর সম্পর্ক স্পষ্ট করো।
+
+৪. কোনও ধারণা সরাসরি নির্ধারণ করা না গেলে অনুমান করে fact হিসেবে লিখবে না। সেক্ষেত্রে সীমাবদ্ধতা স্পষ্টভাবে উল্লেখ করবে।
+
+৫. “আলোচ্য কর্মকান্ড” কীভাবে Universal Harmony-এর সঙ্গে সম্পর্কিত হতে পারে, তা আগের row-গুলির analysis-এর ভিত্তিতে ধারাবাহিকভাবে ব্যাখ্যা করো।
+
+৬. Imbalance এবং Resetting Effect-এর ক্ষেত্রে cause-and-effect relationship স্পষ্ট রাখো।
+
+৭. Resetting Effect-কে punishment হিসেবে ধরে নেবে না। এটি self-balancing Tantra-এর corrective consequence হিসেবে বিশ্লেষণ করবে।
+
+৮. দ্বিতীয় কলামে Universal Reference-এর content হুবহু copy করে দেওয়ার পরিবর্তে, আলোচ্য কর্মকান্ডের ক্ষেত্রে তার প্রয়োগ ব্যাখ্যা করবে।
+
+৯. তৃতীয় কলামের fixed content কোনওভাবেই পরিবর্তন করবে না।
+
+১০. কোনও row-তে অপ্রাসঙ্গিক বা কল্পিত তথ্য যোগ করবে না।
+
+১১. Table-এর আটটি row-ই পূরণ করার চেষ্টা করবে। কোনও row-তে যথেষ্ট ভিত্তি না থাকলে সেখানে “পর্যাপ্ত তথ্য নেই” বা তার উপযুক্ত ব্যাখ্যা দেবে।
+
+১২. উত্তরটি Table আকারেই দাও। Table-এর পরে সর্বাধিক সংক্ষিপ্তভাবে আলোচ্য কর্মকান্ডের Universal Harmony-এর সঙ্গে সম্পর্ক এবং সম্ভাব্য Resetting Effect-এর causal summary দাও।`;
+
+function updatePrompt(){
+    const value = activity.value.trim() || "[আলোচ্য কর্ম বা কর্মকান্ড]";
+    promptBox.value = template.replace(/\[আলোচ্য কর্ম বা কর্মকান্ড\]/g, value);
+}
+activity.addEventListener("input", updatePrompt);
+updatePrompt();
+
+function copyPrompt(){
+    navigator.clipboard.writeText(promptBox.value).then(()=>{
+        const old = copyBtn.textContent;
+        copyBtn.textContent = "✓ Copied!";
+        copyBtn.classList.add("copied");
+        setTimeout(()=>{
+            copyBtn.textContent = old;
+            copyBtn.classList.remove("copied");
+        },1800);
+    }).catch(()=>{
+        promptBox.select();
+        document.execCommand("copy");
+    });
+}
+</script>
+
+</body>
+</html>
