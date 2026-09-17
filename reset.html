@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resetting Effect বনাম Punishment — Unfold Actuality</title>
+    <style>
+        :root {
+            --primary-color: #1a365d;
+            --accent-color: #2b6cb0;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-color: #2d3748;
+            --border-color: #e2e8f0;
+            --note-bg: #edf2f7;
+            --success-color: #2f855a;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.7;
+            padding: 12px;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        h1 {
+            font-size: 1.4rem;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+            letter-spacing: 0.5px;
+        }
+
+        .subtitle {
+            font-size: 0.9rem;
+            color: #718096;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        section {
+            margin-bottom: 18px;
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 15px;
+            transition: box-shadow 0.2s ease;
+        }
+
+        section:hover {
+            box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 8px;
+            margin-bottom: 12px;
+            gap: 10px;
+        }
+
+        h2 {
+            font-size: 1.05rem;
+            color: var(--accent-color);
+            margin: 0;
+        }
+
+        .copy-btn {
+            background-color: #edf2f7;
+            border: 1px solid #cbd5e0;
+            color: #4a5568;
+            padding: 5px 10px;
+            font-size: 0.78rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+            font-weight: 600;
+        }
+
+        .copy-btn:hover {
+            background-color: var(--accent-color);
+            color: #ffffff;
+            border-color: var(--accent-color);
+        }
+
+        .copy-btn.copied {
+            background-color: var(--success-color) !important;
+            color: #ffffff !important;
+            border-color: var(--success-color) !important;
+        }
+
+        p, ul, ol {
+            font-size: 0.93rem;
+            margin-bottom: 8px;
+            color: #334155;
+        }
+
+        ul, ol {
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 6px;
+        }
+
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.88rem;
+            text-align: left;
+            min-width: 500px;
+        }
+
+        th, td {
+            padding: 10px 12px;
+            border-bottom: 1px solid var(--border-color);
+            border-right: 1px solid var(--border-color);
+        }
+
+        th:last-child, td:last-child {
+            border-right: none;
+        }
+
+        th {
+            background-color: var(--note-bg);
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .highlight-box {
+            background-color: #f1f5f9;
+            border: 1px dashed var(--accent-color);
+            padding: 12px;
+            border-radius: 6px;
+            margin-top: 8px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 0.8rem;
+            color: #94a3b8;
+            border-top: 1px solid var(--border-color);
+            padding-top: 15px;
+        }
+
+        /* Responsive Breakpoints */
+        @media (min-width: 768px) {
+            body {
+                padding: 25px;
+            }
+            .container {
+                padding: 35px;
+            }
+            h1 {
+                font-size: 1.8rem;
+            }
+            h2 {
+                font-size: 1.2rem;
+            }
+            p, ul, ol {
+                font-size: 0.98rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Resetting Effect বনাম Punishment</h1>
+            <div class="subtitle">Comparative Analysis — Unfold Actuality</div>
+        </header>
+
+        <main>
+            <!-- 1 -->
+            <section>
+                <div class="section-header">
+                    <h2>মূল ধারণা</h2>
+                    <button class="copy-btn" onclick="copySectionText(this)">কপি টেক্সট</button>
+                </div>
+                <div class="section-body">
+                    <p>Resetting Effect / প্রত্যাঘাত এবং Punishment / শাস্তি একই বিষয় নয়।</p>
+                    <p>Resetting Effect হল কোনও self-balancing Tantra-এর স্বাভাবিক corrective response। যখন কোনও imbalance তৈরি হয়, তখন Tantra-এর নিজস্ব operation সেই imbalance কমিয়ে system-কে পুনরায় balance-এর দিকে নিয়ে যেতে যে consequence, resistance, loss, disruption বা পুনর্বিন্যাস সৃষ্টি করে, সেটিই Resetting Effect।</p>
+                    <p>অন্যদিকে, Punishment হল কোনও ব্যক্তি বা সত্তার কোনও কাজকে অপরাধ, ভুল বা অনুচিত বলে বিবেচনা করে তার জন্য ইচ্ছাকৃতভাবে শাস্তি প্রদান করা।</p>
+                </div>
+            </section>
+
+            <!-- 2 -->
+            <section>
+                <div class="section-header">
+                    <h2>পার্থক্য তুলনামূলক ছক</h2>
+                    <button class="copy-btn" onclick="copySectionText(this)">কপি টেক্সট</button>
+                </div>
+                <div class="section-body">
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Resetting Effect</th>
+                                    <th>Punishment</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Imbalance-এর corrective consequence</td>
+                                    <td>কোনও কাজের জন্য আরোপিত শাস্তি</td>
+                                </tr>
+                                <tr>
+                                    <td>Self-balancing operation-এর স্বাভাবিক ফল</td>
+                                    <td>কোনও agent বা authority-এর দ্বারা আরোপিত হতে পারে</td>
+                                </tr>
+                                <tr>
+                                    <td>মূল উদ্দেশ্য balance পুনঃস্থাপন</td>
+                                    <td>সাধারণত দণ্ড, প্রতিরোধ বা জবাবদিহির উদ্দেশ্য থাকে</td>
+                                </tr>
+                                <tr>
+                                    <td>ব্যক্তিকে “দোষী” সাব্যস্ত করা প্রয়োজন নয়</td>
+                                    <td>সাধারণত কোনও কাজকে অপরাধ/দোষ হিসেবে বিবেচনা করা হয়</td>
+                                </tr>
+                                <tr>
+                                    <td>এটি system-এর operating process-এর অংশ</td>
+                                    <td>এটি একটি normative বা বিচারমূলক response</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3 -->
+            <section>
+                <div class="section-header">
+                    <h2>ব্যাখ্যা ও সিদ্ধান্ত</h2>
+                    <button class="copy-btn" onclick="copySectionText(this)">কপি টেক্সট</button>
+                </div>
+                <div class="section-body">
+                    <p>সুতরাং, Universal self-balancing Tantra-এর ক্ষেত্রে কোনও ব্যক্তি বা ঘটনার উপর negative consequence ঘটলেই তাকে punishment বলা হবে না।</p>
+                    <p>যদি সেই consequence-টি system-এর স্বাভাবিক self-balancing বা corrective operation-এর ফল হয়, তাহলে সেটিকে Resetting Effect / প্রত্যাঘাত বলা হবে।</p>
+                </div>
+            </section>
+
+            <!-- 4 -->
+            <section>
+                <div class="section-header">
+                    <h2>সংক্ষেপে প্রবাহ</h2>
+                    <button class="copy-btn" onclick="copySectionText(this)">কপি টেক্সট</button>
+                </div>
+                <div class="section-body">
+                    <div class="highlight-box">
+                        Imbalance → Corrective Operation → Consequence = Resetting Effect
+                    </div>
+                    <p style="text-align: center; margin: 10px 0; font-weight: bold; color: var(--accent-color);">কিন্তু</p>
+                    <div class="highlight-box">
+                        Perceived Wrongdoing → Judgment → Imposed Penalty = Punishment
+                    </div>
+                </div>
+            </section>
+
+            <!-- 5 -->
+            <section>
+                <div class="section-header">
+                    <h2>মূল প্রশ্ন</h2>
+                    <button class="copy-btn" onclick="copySectionText(this)">কপি টেক্সট</button>
+                </div>
+                <div class="section-body">
+                    <p>অতএব, Resetting Effect-এর ধারণায় <em>“কে শাস্তি দিল?”</em>—এই প্রশ্নটি মুখ্য নয়; বরং <em>“কোন imbalance-এর কারণে system-এর corrective operation থেকে কী consequence তৈরি হল?”</em>—এই প্রশ্নটিই মুখ্য।</p>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            Resetting Effect vs Punishment | Unfold Actuality
+        </footer>
+    </div>
+
+    <script>
+        function copySectionText(button) {
+            const section = button.closest('section');
+            const body = section.querySelector('.section-body');
+            
+            // Text to copy (Heading + Body content)
+            const headingText = section.querySelector('h2').innerText;
+            const bodyText = body.innerText;
+            const fullText = headingText + "\n\n" + bodyText;
+
+            navigator.clipboard.writeText(fullText).then(() => {
+                const originalText = button.innerText;
+                button.innerText = 'কপি হয়েছে!';
+                button.classList.add('copied');
+                
+                setTimeout(() => {
+                    button.innerText = originalText;
+                    button.classList.remove('copied');
+                }, 2000);
+            }).catch(err => {
+                console.error('কপি করতে ব্যর্থ হয়েছে: ', err);
+            });
+        }
+    </script>
+</body>
+</html>
