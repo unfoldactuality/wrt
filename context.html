@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unfold Actuality — Context Document with Copy Buttons</title>
+    <style>
+        :root {
+            --primary-color: #1a365d;
+            --accent-color: #2b6cb0;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-color: #2d3748;
+            --border-color: #e2e8f0;
+            --note-bg: #edf2f7;
+            --success-color: #2f855a;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.7;
+            padding: 12px;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        h1 {
+            font-size: 1.4rem;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+            letter-spacing: 0.5px;
+        }
+
+        .subtitle {
+            font-size: 0.9rem;
+            color: #718096;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .note-box {
+            background-color: var(--note-bg);
+            border-left: 4px solid var(--accent-color);
+            padding: 12px 15px;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            border-radius: 0 8px 8px 0;
+            color: #4a5568;
+            position: relative;
+        }
+
+        section {
+            margin-bottom: 18px;
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 15px;
+            transition: box-shadow 0.2s ease;
+        }
+
+        section:hover {
+            box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 8px;
+            margin-bottom: 12px;
+            gap: 10px;
+        }
+
+        h2 {
+            font-size: 1.05rem;
+            color: var(--accent-color);
+            margin: 0;
+        }
+
+        .copy-btn {
+            background-color: #edf2f7;
+            border: 1px solid #cbd5e0;
+            color: #4a5568;
+            padding: 5px 10px;
+            font-size: 0.78rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+            font-weight: 600;
+        }
+
+        .copy-btn:hover {
+            background-color: var(--accent-color);
+            color: #ffffff;
+            border-color: var(--accent-color);
+        }
+
+        .copy-btn.copied {
+            background-color: var(--success-color) !important;
+            color: #ffffff !important;
+            border-color: var(--success-color) !important;
+        }
+
+        p, ul, ol {
+            font-size: 0.93rem;
+            margin-bottom: 8px;
+            color: #334155;
+        }
+
+        ul, ol {
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 6px;
+        }
+
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.88rem;
+            text-align: left;
+            min-width: 500px;
+        }
+
+        th, td {
+            padding: 10px 12px;
+            border-bottom: 1px solid var(--border-color);
+            border-right: 1px solid var(--border-color);
+        }
+
+        th:last-child, td:last-child {
+            border-right: none;
+        }
+
+        th {
+            background-color: var(--note-bg);
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .highlight-box {
+            background-color: #f1f5f9;
+            border: 1px dashed var(--accent-color);
+            padding: 12px;
+            border-radius: 6px;
+            margin-top: 8px;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 0.8rem;
+            color: #94a3b8;
+            border-top: 1px solid var(--border-color);
+            padding-top: 15px;
+        }
+
+        /* Responsive Breakpoints */
+        @media (min-width: 768px) {
+            body {
+                padding: 25px;
+            }
+            .container {
+                padding: 35px;
+            }
+            h1 {
+                font-size: 1.8rem;
+            }
+            h2 {
+                font-size: 1.2rem;
+            }
+            p, ul, ol {
+                font-size: 0.98rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>UNFOLD ACTUALITY</h1>
+            <div class="subtitle">Context Document — First Person</div>
+        </header>
+
+        <div class="note-box" id="note-box-content">
+            <button class="copy-btn" onclick="copySpecificElement('note-box-content', this)" style="float: right; margin-left: 10px;">কপি টেক্সট</button>
+            <strong>নোট:</strong> এই নথিটি আপলোড করা formulation থেকে আমাদের বিশ্বাস, বিচারধারা, Mission, Core Message এবং সংশ্লিষ্ট গুরুত্বপূর্ণ ধারণাগুলিকে প্রথম পুরুষে সংগঠিত করে তৈরি করা হয়েছে। এখানে source-এ থাকা ধারণা ও terminology-কে সম্ভবপর্যন্ত অপরিবর্তিত রাখা হয়েছে; নতুন তত্ত্ব বা বাইরের তথ্য যোগ করা হয়নি।
+            <div style="clear: both;"></div>
+        </div>
+
+        <main>
+            <!-- 1 -->
+            <section>
+                <div class="section-header">
+                    <h2>1. Mission — Unfold Actuality</h2>
+                    <button class="copy-btn" onclick="copySectionText(this)">কপি টেক্সট</button>
+                </div>
+                <div class="section-body">
+                    <p>আমাদের মূল উদ্দেশ্য হল মানুষকে এমনভাবে দেখতে শেখানো, যাতে সে দৃশ্যমান ঘটনার পিছনে থাকা system-কে বুঝতে পারে, তার automatic operation চিনতে পারে, এবং Truth Awareness-এর ভিত্তিতে সেই system-এর মধ্যে সচেতনভাবে intervention করতে পারে।</p>
+                    <p>আমাদের কেন্দ্রীয় দৃষ্টিভঙ্গি হল: Actuality-এর নিচে থাকা Structure, Tantra, Rule, Power এবং Purpose-কে একের পর এক unfold করে দেখা।</p>
+                </div>
+            </section>
+
+            <!-- 2 -->
+            <section>
+                <div class="section-header">
+                    <h2>2. Core Message — সংক্ষিপ্ত রূপ</h2>
+                    <button class="copy-btn" onclick="copySectionText(this)">কপি টেক্সট</button>
+                </div>
+                <div class="section-body">
+                    <p><strong>System Awareness gives us the power to intervene.</strong></p>
+                    <p><strong>Truth Awareness gives us the direction.</strong></p>
+                    <p><strong>Awareness Following keeps our intervention aligned with Universal Harmony.</strong></p>
+                    <div class="highlight-box">
+                        <strong>বাংলা formulation:</strong> System Awareness মানুষকে system-এর মধ্যে intervention করার ক্ষমতা দেয়; Truth Awareness intervention-এর direction দেয়; Awareness Activation / Following সেই বোঝাপড়াকে decision ও action-এ প্রয়োগ করে এবং Universal Harmony-এর সঙ্গে alignment বজায় রাখে।
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3 -->
+            <section>
+                <div class="section-header">
+                    <h2>3. Fundamental Belief / Universal Truth</h2>
+                    <button class="copy-btn" onclick="copySectionText(this)">কপি টেক্সট</button>
+                </div>
+                <div class="section-body">
+                    <p>বিশ্ব একটি auto-run, self-balancing তন্ত্র বা power দ্বারা পরিচালিত, যার fundamental purpose হল Universal Harmony।</p>
+                    <p>এই Universal Truth কোনও বিমূর্ত 'সত্য কথা' হিসেবে নয়; Actuality-এর একটি fundamental operating principle হিসেবে উপস্থাপিত হয়েছে। এর awareness-এর মধ্যে সেই তন্ত্রের গঠন, কাজের পদ্ধতি, চালিকা শক্তি এবং উদ্দেশ্য সম্পর্কে awareness অন্তর্ভুক্ত।</p>
+                </div>
+            </section>
+
+            <!-- 4 -->
+            <section>
+                <div class="section-header">
+                    <h2>4. Truth Awareness</h2>
+                    <button class="copy-btn" onclick="copySectionText(this)">কপি টেক্সট</button>
+                </div>
+                <div class="section-body">
+                    <p>আমাদের কাছে <strong>Truth Awareness</strong> = Universal self-balancing Tantra/Power-এর Structure + Operation + Purpose সম্পর্কে awareness।</p>
+                    <p>আমাদের কাছে Truth Awareness হল: বিশ্ব কীভাবে নিজেকে পরিচালনা ও balance করে এবং সেই operation-এর উদ্দেশ্য Universal Harmony—এই Actuality সম্পর্কে সচেতন হওয়া।</p>
+                    <p><strong>Truth Awareness-এর মূল প্রশ্ন:</strong> 'Universal self-balancing system কীভাবে চলে এবং তার উদ্দেশ্য কী?'</p>
+                </div>
+            </section>
+
+            <!-- 5 -->
+            <section>
+                <div class="section-header">
+                    <h2>5. System Awareness</h2>
+                    <button class="copy-btn" onclick="copySectionText(this)">কপি টেক্সট</button>
+                </div>
+                <div class="section-body">
+                    <p>আমরা <strong>System Awareness</strong> বলতে বুঝি: যে system-এর মধ্যে মানুষ আছে, সেই system-এর Structure, Tantra, Operational Rule এবং driving mechanism দেখা; system কীভাবে চলছে তা বোঝা; এবং কোথায় ও কীভাবে intervention করা সম্ভব তা জানা।</p>
+                    <p><strong>মূল প্রশ্ন:</strong> 'এটা কীভাবে চলছে?'</p>
+                    <p><strong>ফল:</strong> Intervention করার ক্ষমতা।</p>
+                </div>
+            </section>
+
+            <!-- 6 -->
+            <section>
+                <div class="section-header">
+                    <h2>6. Awareness Activation / Awareness Following</h2>
+                    <button class="copy-btn" onclick="copySectionText(this)">কপি টেক্সট</button>
+                </div>
+                <div class="section-body">
+                    <p>আমরা <strong>Awareness Activation / Awareness Following</strong> বলতে বুঝি: Truth Awareness ব্যবহার করে নিজের চিন্তা, সিদ্ধান্ত ও কর্মকাণ্ডকে Universal Harmony-এর সঙ্গে align করা।</p>
+                    <p>আমরা মানুষকে নিজের automatic system যা বলছে সেটাই অনুসরণ না করে তা দেখতে এবং প্রশ্ন করতে বলি: <em>'আমার action কি Universal Harmony-র সঙ্গে aligned?'</em></p>
+                    <p><strong>মূল বিচার প্রশ্ন:</strong> 'আমার এই সিদ্ধান্ত বা কাজ Universal Harmony-কে disturb করবে, না Universal Harmony-কে অনুসরণ করবে?'</p>
+                </div>
+            </section>
+
+            <!-- 7 -->
+            <section>
+                <div class="section-header">
+                    <h2>7. Human Automatic Operation</h2>
+                    <button class="copy-btn" onclick="copySectionText(this)">কপি টেক্সট</button>
+                </div>
+                <div class="section-body">
+                    <p>মানুষের নিজের system-ও situation-এর সামনে automaticভাবে operate করতে পারে:</p>
+                    <p style="text-align: center; font-weight: 600; color: var(--primary-color);">Perception → Interpretation → Emotion → Feeling → Thinking → Decision → Action → Result</p>
+                    <p>Automatic operation-এর ক্ষেত্রে মানুষ তার system-এর তাৎক্ষণিক output অনুসরণ করে। Awareness activation-এর ক্ষেত্রে সে নিজের automatic response-কে দেখে এবং action-এর alignment বিচার করে।</p>
+                </div>
+            </section>
+
+            <!-- 8 -->
+            <section>
+                <div class="section-header">
+                    <h2>8. বিচারধারা — কীভাবে Outcome বিচার করা হবে</h2>
+                    <button class="copy-btn" onclick="copySectionText(this)">কপি টেক্সট</button>
+                </div>
+                <div class="section-body">
+                    <p><strong>প্রচলিত lens:</strong></p>
+                    <ul>
+                        <li>আমি কী পেলাম?</li>
+                        <li>আমি সফল হলাম কি?</li>
+                        <li>এতে আমার লাভ হবে কি?</li>
+                        <li>আমি সফল হব কি?</li>
+                    </ul>
+                    <p><strong>Unfold Actuality lens:</strong></p>
+                    <ul>
+                        <li>আমি যা পেলাম, সেটা কীভাবে পেলাম?</li>
+                        <li>আমার action কোন system-কে প্রভাবিত করল?</li>
+                        <li>সেই action কি self-balancing system-এর harmony-কে support করল, না disturb করল?</li>
+                        <li>যদি disturb করে থাকে, তার corrective consequence কী হতে পারে?</li>
+                    </ul>
+                    <p><strong>মূল বিচারধারা:</strong> Outcome একা বিচার্য নয়; Outcome কোন পথে অর্জিত হয়েছে—Alignment বজায় রেখে, না Alignment ভেঙে—সেটিও তার fundamental determinant।</p>
+                </div>
+            </section>
+
+            <!-- 9 -->
+            <section>
+                <div class="section-header">
+                    <h2>9. Alignment, Outcome ও Consequence</h2>
+                    <button class="copy-btn" onclick="copySectionText(this)">কপি টেক্সট</button>
+                </div>
+                <div class="section-body">
+                    <p><strong>মূল formulation:</strong> Alignment করে পাওয়া Outcome এবং Alignment ভেঙে পাওয়া Outcome বাইরে থেকে একই রকম সফল দেখাতে পারে, কিন্তু তাদের Consequence এক হতে বাধ্য নয়।</p>
+                    <p><strong>Causal model:</strong></p>
+                    <p style="text-align: center; font-weight: 600;">Action → Alignment / Misalignment → Outcome → Self-balancing system-এর interaction → Consequences</p>
+                    <p>এই দৃষ্টিতে short-term personal success এবং Actual success এক নয়। বর্তমান লাভ বা সাফল্যকে দেখে কোনও action-কে ultimately successful বলে ধরে নেওয়া যায় না, যদি তার অর্জনের প্রক্রিয়ায় বৃহত্তর Universal Harmony disturb হয়ে থাকে।</p>
+                </div>
+            </section>
+
+            <!-- 10 -->
+            <section>
+                <div class="section-header">
+                    <h2>10. Universal Harmony Resetting Principle</h2>
+                    <button class="copy-btn" onclick="copySectionText(this)">কপি টেক্সট</button>
+                </div>
+                <div class="section-body">
+                    <p>যখন কোনও ব্যক্তি, সিদ্ধান্ত বা কর্মকাণ্ড বৃহত্তর self-balancing system-এর Universal Harmony-কে disturb করে, তখন সেই system-এর স্বাভাবিক self-balancing operation সেই imbalance-কে reduce বা correct করার দিকে কাজ করে। এই corrective process-এ যে consequences, resistance, loss, disruption বা পুনর্বিন্যাস সৃষ্টি হয়, সেটিই সেই imbalance-এর প্রত্যাঘাত বা Resetting Effect।</p>
+                    <ul>
+                        <li><strong>প্রত্যাঘাত ≠ punishment।</strong></li>
+                        <li><strong>প্রত্যাঘাত = imbalance-এর corrective consequence।</strong></li>
+                    </ul>
+                    <p>Resetting-এর উদ্দেশ্য মানুষকে কষ্ট দেওয়া নয়; যেখানে imbalance হয়েছে, সেখানে balance পুনঃপ্রতিষ্ঠা করা।</p>
+                    <p>এই corrective consequence তাৎক্ষণিক নাও হতে পারে—'আজ না হোক, একটা সময় পরে'—অর্থাৎ time lag থাকতে পারে।</p>
+                </div>
+            </section>
+
+            <!-- 11 -->
+            <section>
+                <div class="section-header">
+                    <h2>11. Harmony Disturbance থেকে Consequence</h2>
+                    <button class="copy-btn" onclick="copySectionText(this)">কপি টেক্সট</button>
+                </div>
+                <div class="section-body">
+                    <p style="text-align: center; font-weight: 600;">Action → System-এ disturbance → Imbalance → Self-balancing tendency → Correction / Resetting → Consequence</p>
+                    <p>মানুষ কোনও imbalance সৃষ্টি করে immediate gain বা success পেতে পারে; কিন্তু Actuality-এর বৃহত্তর system-এর দৃষ্টিতে ঘটনাটি তখনও শেষ নয়। Self-balancing system-এর resetting mechanism-এর মাধ্যমে disturbance eventually address হতে পারে।</p>
+                </div>
+            </section>
+
+            <!-- 12 -->
+            <section>
+                <div class="section-header">
+                    <h2>12. True Success</h2>
+                    <button class="copy-btn" onclick="copySectionText(this)">কপি টেক্সট</button>
+                </div>
+                <div class="section-body">
+                    <p><strong>True Success</strong> = শুধু কাঙ্ক্ষিত Outcome পাওয়া নয়; এমনভাবে Outcome পাওয়া, যাতে সেই Outcome-এর মধ্যে ভবিষ্যৎ disharmony-এর বীজ তৈরি না হয়।</p>
+                    <p><strong>সংক্ষিপ্ত formulation:</strong> True Success = Outcome + Alignment</p>
+                    <p>আরও নির্দিষ্টভাবে: যে সাফল্য অর্জনের জন্য এমন কোনও fundamental imbalance সৃষ্টি করতে হয় না, যার corrective consequence পরে সেই সাফল্যকেই undermine করবে।</p>
+                </div>
+            </section>
+
+            <!-- 13 -->
+            <section>
+                <div class="section-header">
+                    <h2>13. True Happiness, Joy ও Sustainable Success</h2>
+                    <button class="copy-btn" onclick="copySectionText(this)">কপি টেক্সট</button>
+                </div>
+                <div class="section-body">
+                    <p>Pleasure / Gain / Immediate Success এবং True Happiness / Joy / Sustainable Success এক জিনিস নয়।</p>
+                    <p>Momentary desire fulfilment আনন্দ দিতে পারে; কিন্তু যদি সেই কাজ বৃহত্তর harmony disturb করে, তাহলে সেই আনন্দের ভিতর future correction-এর কারণও তৈরি হতে পারে।</p>
+                    <p>True Happiness / Joy / Sustainable Success-এর ভিত্তি হিসেবে বলা হয়েছে: নিজের জীবনযাত্রা ও কর্মকাণ্ডকে এমনভাবে পরিচালনা করা যাতে নিজের সঙ্গে বৃহত্তর self-balancing reality-র সংঘাত ক্রমশ কমে এবং alignment বাড়ে।</p>
+                    <p>আমাদের মতে, এই জায়গাতেই মানুষের জীবনের True Success, Joy এবং Happiness-এর দিশা নিহিত।</p>
+                </div>
+            </section>
+
+            <!-- 14 -->
+            <section>
+                <div class="section-header">
+                    <h2>14. Two Awareness-এর সম্পর্ক</h2>
+                    <button class="copy-btn" onclick="copySectionText(this)">কপি টেক্সট</button>
+                </div>
+                <div class="section-body">
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Awareness</th>
+                                    <th>মূল প্রশ্ন</th>
+                                    <th>ফল</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>System Awareness</strong></td>
+                                    <td>যে system-এর মধ্যে আমি আছি, সেটা কীভাবে চলছে?</td>
+                                    <td>Intervention করার ক্ষমতা</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Truth Awareness</strong></td>
+                                    <td>Universal self-balancing system কীভাবে চলে এবং তার উদ্দেশ্য কী?</td>
+                                    <td>Intervention-এর direction</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Awareness Activation / Following</strong></td>
+                                    <td>আমার intervention কি Universal Harmony-এর সঙ্গে aligned?</td>
+                                    <td>সচেতন সিদ্ধান্ত ও কর্ম</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 15 -->
+            <section>
+                <div class="section-header">
+                    <h2>15. Central Conceptual Movement</h2>
+                    <button class="copy-btn" onclick="copySectionText(this)">কপি টেক্সট</button>
+                </div>
+                <div class="section-body">
+                    <p>Actuality-কে দেখা → তার Structure ও System unfold করা → তার automatic rules দেখা → Universal self-balancing Tantra/Power-এর Actuality unfold করা → Truth Awareness তৈরি করা → নিজের system-এর automatic operation-কে দেখা → সচেতন intervention করা → Universal Harmony-এর সঙ্গে action align করা</p>
+                </div>
+            </section>
+
+            <!-- 16 -->
+            <section>
+                <div class="section-header">
+                    <h2>16. দুই সম্ভাব্য পথ</h2>
+                    <button class="copy-btn" onclick="copySectionText(this)">কপি টেক্সট</button>
+                </div>
+                <div class="section-body">
+                    <p><strong>Alignment-এর পথ:</strong></p>
+                    <p>System Awareness + Truth Awareness → Conscious Intervention → Awareness Following → Universal Harmony-aligned Decision / Action → True Outcome → Success • Joy • Happiness</p>
+                    <p style="margin-top: 10px;"><strong>Misalignment-এর পথ:</strong></p>
+                    <p>Automatic / Unaware Action → Harmony Disturbance → Imbalance → Self-Balancing Operation → Resetting Effect → Consequence</p>
+                </div>
+            </section>
+
+            <!-- 17 -->
+            <section>
+                <div class="section-header">
+                    <h2>17. Consequence-কে দেখার নতুন Lens</h2>
+                    <button class="copy-btn" onclick="copySectionText(this)">কপি টেক্সট</button>
+                </div>
+                <div class="section-body">
+                    <p>একই ঘটনা মানুষের কাছে 'দুর্ভাগ্য', 'ব্যর্থতা', 'ক্ষতি' বা 'প্রত্যাঘাত' বলে মনে হতে পারে; কিন্তু আমাদের lens-এ সেটিকে balancing signal হিসেবে দেখার প্রশ্ন ওঠে:</p>
+                    <p><em>“এই ঘটনার মধ্যে কি কোনও balancing signal আছে?”</em></p>
+                    <p>এরপর অনুসন্ধানের দিক: <em>“আমি কোথায় system-এর balance-এর বিরুদ্ধে গিয়েছিলাম?”</em></p>
+                    <p style="text-align: center; font-weight: 600; margin-top: 6px;">Observe → Understand → Correct → Realign</p>
+                </div>
+            </section>
+
+            <!-- 18 -->
+            <section>
+                <div class="section-header">
+                    <h2>18. মানুষের জীবনের জন্য Practical Core</h2>
+                    <button class="copy-btn" onclick="copySectionText(this)">কপি টেক্সট</button>
+                </div>
+                <div class="section-body">
+                    <p>মানুষ সাধারণত outcome-এর সঙ্গে লড়াই করে, কিন্তু outcome তৈরি করা system কীভাবে চলছে তা দেখে না। শুধু system বুঝে ফেললেও মানুষ নিজের সুবিধা, ভয়, আকাঙ্ক্ষা বা সীমিত ধারণার ভিত্তিতে intervention করতে পারে। তাই System Awareness একা যথেষ্ট নয়।</p>
+                    <p>আমাদের central practical movement হল: corrective consequence আসার পরে শেখার বদলে, আগেই system এবং truth বুঝে conscious intervention করার চেষ্টা করা।</p>
+                </div>
+            </section>
+
+            <!-- 19 -->
+            <section>
+                <div class="section-header">
+                    <h2>19. Outcome-এর আগে যে প্রশ্ন</h2>
+                    <button class="copy-btn" onclick="copySectionText(this)">কপি টেক্সট</button>
+                </div>
+                <div class="section-body">
+                    <p><em>“আমি যা পেতে চাই, তা কি শুধু পাচ্ছি—নাকি এমনভাবে পাচ্ছি, যা Universal Harmony-এর সঙ্গে aligned?”</em></p>
+                    <p>কারণ সত্যিকারের সাফল্য Outcome-এ শেষ হয় না; Outcome-এর পর কী ঘটে, সেটিও সাফল্যের অংশ।</p>
+                </div>
+            </section>
+
+            <!-- 20 -->
+            <section>
+                <div class="section-header">
+                    <h2>20. Important Conceptual Notes / সতর্কতা</h2>
+                    <button class="copy-btn" onclick="copySectionText(this)">কপি টেক্সট</button>
+                </div>
+                <div class="section-body">
+                    <ul>
+                        <li>আমাদের লক্ষ্য ready-made belief দেওয়া নয়; আমরা Actuality-এর ভিতরের order নিজে দেখতে শেখাতে চাই।</li>
+                        <li>Truth Awareness framework-এর সবচেয়ে গুরুত্বপূর্ণ কিন্তু vulnerable অংশ; প্রশ্ন থাকে—কীভাবে জানা যাবে যে মানুষ সত্যকে দেখছে, নাকি নিজের ধারণাকেই 'সত্য' বলছে?</li>
+                        <li>Universal self-balancing power এবং তার fundamental purpose Universal Harmony—এই দাবিকে পাঠকের সামনে রাখলে প্রশ্ন উঠবে: কীভাবে জানা যাবে যে এমন power/order সত্যিই আছে?</li>
+                        <li>এই কারণে formulation-এ investigation-এর orientation গুরুত্বপূর্ণ: “চলুন Actuality-কে unfold করে দেখি—বিশ্বের ঘটনাগুলির নিচে সত্যিই কি এমন কোনও self-balancing order দেখা যায়?”</li>
+                        <li>Resetting Effect-কে punishment হিসেবে বোঝানো হয়নি; এটি imbalance-এর corrective consequence / balance restoration হিসেবে বোঝানো হয়েছে।</li>
+                        <li>Resetting-এর উদ্দেশ্য ব্যক্তিগত সাফল্য নষ্ট করা নয়; fundamental direction হল Harmony restore করা।</li>
+                        <li>Corrective consequence-এর ক্ষেত্রে time lag থাকতে পারে; immediate outcome final outcome নয়।</li>
+                        <li>Short-term personal success এবং Actual success আলাদা।</li>
+                        <li>Outcome-এর consequence শুধু কী পাওয়া গেল তার উপর নয়; কীভাবে পাওয়া গেল—Alignment বা Misalignment—সেটিও গুরুত্বপূর্ণ।</li>
+                        <li>Awareness-এর সর্বোচ্চ ব্যবহার শুধু সত্য জানা নয়; সত্য জেনে নিজের action-কে সেই সত্যের সঙ্গে align করা।</li>
+                        <li>মানুষ যা করতে পারে, তার সবকিছু করবে না; Truth-এর সঙ্গে aligned যা, সেটাই করার চেষ্টা করবে—এই formulationটি source-এ এসেছে।</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 21 -->
+            <section>
+                <div class="section-header">
+                    <h2>21. Master Context — AI Prompt-এর জন্য condensed version</h2>
+                    <button class="copy-btn" onclick="copySectionText(this)">কপি টেক্সট</button>
+                </div>
+                <div class="section-body">
+                    <p>আমরা Unfold Actuality-কে Actuality-এর অন্তর্নিহিত Structure, System, Tantra, Rule, Power এবং Purpose unfold করে মানুষকে আরও সচেতনভাবে জীবন ও action বিচার করতে সাহায্য করার একটি mission-oriented conceptual body হিসেবে দেখি। আমাদের মূল বিশ্বাস হল: বিশ্ব একটি auto-run, self-balancing Tantra/Power দ্বারা পরিচালিত, যার fundamental purpose Universal Harmony। System Awareness আমাদের বুঝতে সাহায্য করে যে system কীভাবে চলে এবং কোথায় intervention করা যায়; Truth Awareness আমাদের বুঝতে সাহায্য করে Universal self-balancing system কীভাবে চলে এবং তার fundamental direction কী; Awareness Activation / Following সেই awareness ব্যবহার করে চিন্তা, সিদ্ধান্ত ও কর্মকাণ্ডকে Universal Harmony-এর সঙ্গে align করার চেষ্টা। কোনও Outcome-কে শুধু তার immediate gain বা success দিয়ে বিচার করা যাবে না; Outcome কীভাবে অর্জিত হয়েছে—Alignment বজায় রেখে নাকি Alignment ভেঙে—এটিও তার consequences-এর একটি fundamental determinant। Universal Harmony disturb হলে self-balancing system-এর corrective/resetting operation imbalance address করতে পারে; সেই corrective consequence-ই Resetting Effect বা প্রত্যাঘাত। এটি punishment নয়, balance restoration-এর স্বাভাবিক consequence। তাই True Success শুধু desired outcome নয়; Outcome + Alignment। True Happiness, Joy এবং Sustainable Success-এর দিশা হল বৃহত্তর self-balancing reality-র সংঘাত কমিয়ে alignment বাড়ানো। আমাদের লক্ষ্য কোনও ready-made belief চাপিয়ে দেওয়া নয়; বরং Actuality-এর ভিতরের order-কে unfold করে দেখা এবং মানুষকে conscious intervention-এর দিকে নিয়ে যাওয়া।</p>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            Prepared from the uploaded formulation source | Unfold Actuality
+        </footer>
+    </div>
+
+    <script>
+        function copySectionText(button) {
+            const section = button.closest('section');
+            const body = section.querySelector('.section-body');
+            
+            // Text to copy (Heading + Body content)
+            const headingText = section.querySelector('h2').innerText;
+            const bodyText = body.innerText;
+            const fullText = headingText + "\n\n" + bodyText;
+
+            navigator.clipboard.writeText(fullText).then(() => {
+                const originalText = button.innerText;
+                button.innerText = 'কপি হয়েছে!';
+                button.classList.add('copied');
+                
+                setTimeout(() => {
+                    button.innerText = originalText;
+                    button.classList.remove('copied');
+                }, 2000);
+            }).catch(err => {
+                console.error('কপি করতে ব্যর্থ হয়েছে: ', err);
+            });
+        }
+
+        function copySpecificElement(elementId, button) {
+            const element = document.getElementById(elementId);
+            const clone = element.cloneNode(true);
+            const btn = clone.querySelector('button');
+            if (btn) btn.remove();
+            const textToCopy = clone.innerText.trim();
+
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                const originalText = button.innerText;
+                button.innerText = 'কপি হয়েছে!';
+                button.classList.add('copied');
+                
+                setTimeout(() => {
+                    button.innerText = originalText;
+                    button.classList.remove('copied');
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>
