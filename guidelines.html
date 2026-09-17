@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guideline / বিশ্লেষণের নির্দেশনা — Unfold Actuality</title>
+    <style>
+        :root {
+            --primary-color: #1a365d;
+            --accent-color: #2b6cb0;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-color: #2d3748;
+            --border-color: #e2e8f0;
+            --note-bg: #edf2f7;
+            --success-color: #2f855a;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.7;
+            padding: 12px;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        h1 {
+            font-size: 1.4rem;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+            letter-spacing: 0.5px;
+        }
+
+        .subtitle {
+            font-size: 0.9rem;
+            color: #718096;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        section {
+            margin-bottom: 18px;
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 15px;
+            transition: box-shadow 0.2s ease;
+        }
+
+        section:hover {
+            box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 8px;
+            margin-bottom: 12px;
+            gap: 10px;
+        }
+
+        h2 {
+            font-size: 1.05rem;
+            color: var(--accent-color);
+            margin: 0;
+        }
+
+        .copy-btn {
+            background-color: #edf2f7;
+            border: 1px solid #cbd5e0;
+            color: #4a5568;
+            padding: 5px 10px;
+            font-size: 0.78rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+            font-weight: 600;
+        }
+
+        .copy-btn:hover {
+            background-color: var(--accent-color);
+            color: #ffffff;
+            border-color: var(--accent-color);
+        }
+
+        .copy-btn.copied {
+            background-color: var(--success-color) !important;
+            color: #ffffff !important;
+            border-color: var(--success-color) !important;
+        }
+
+        p {
+            font-size: 0.93rem;
+            color: #334155;
+            margin-bottom: 6px;
+        }
+
+        .guideline-title {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .guideline-desc {
+            color: #4a5568;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 0.8rem;
+            color: #94a3b8;
+            border-top: 1px solid var(--border-color);
+            padding-top: 15px;
+        }
+
+        /* Responsive Breakpoints */
+        @media (min-width: 768px) {
+            body {
+                padding: 25px;
+            }
+            .container {
+                padding: 35px;
+            }
+            h1 {
+                font-size: 1.8rem;
+            }
+            h2 {
+                font-size: 1.2rem;
+            }
+            p {
+                font-size: 0.98rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Guideline / বিশ্লেষণের নির্দেশনা</h1>
+            <div class="subtitle">আলোচ্য কর্মকান্ডের ক্ষেত্রে প্রয়োগ — Unfold Actuality</div>
+        </header>
+
+        <main>
+            <!-- 1 -->
+            <section>
+                <div class="section-header">
+                    <h2>1. Structure-এর definition</h2>
+                    <button class="copy-btn" onclick="copySectionText(this)">কপি টেক্সট</button>
+                </div>
+                <div class="section-body">
+                    <p class="guideline-title">আলোচ্য কর্মকান্ডের ক্ষেত্রে প্রয়োগ:</p>
+                    <p class="guideline-desc">[দেওয়া কর্মকান্ডটির Structure কী?] (অপরিবর্তিত)</p>
+                </div>
+            </section>
+
+            <!-- 2 -->
+            <section>
+                <div class="section-header">
+                    <h2>2. Tantra-এর definition</h2>
+                    <button class="copy-btn" onclick="copySectionText(this)">কপি টেক্সট</button>
+                </div>
+                <div class="section-body">
+                    <p class="guideline-title">আলোচ্য কর্মকান্ডের ক্ষেত্রে প্রয়োগ:</p>
+                    <p class="guideline-desc">[দেওয়া কর্মকান্ডটি কোন Tantra/ব্যবস্থার অংশ বা কীভাবে self-balancing operation-এর সঙ্গে যুক্ত?] (অপরিবর্তিত)</p>
+                </div>
+            </section>
+
+            <!-- 3 -->
+            <section>
+                <div class="section-header">
+                    <h2>3. Power-এর definition</h2>
+                    <button class="copy-btn" onclick="copySectionText(this)">কপি টেক্সট</button>
+                </div>
+                <div class="section-body">
+                    <p class="guideline-title">আলোচ্য কর্মকান্ডের ক্ষেত্রে প্রয়োগ:</p>
+                    <p class="guideline-desc">[এই কর্মকান্ডের ক্ষেত্রে সংশ্লিষ্ট Power কী?] (অপরিবর্তিত)</p>
+                </div>
+            </section>
+
+            <!-- 4 -->
+            <section>
+                <div class="section-header">
+                    <h2>4. Operational Rule-এর definition</h2>
+                    <button class="copy-btn" onclick="copySectionText(this)">কপি টেক্সট</button>
+                </div>
+                <div class="section-body">
+                    <p class="guideline-title">আলোচ্য কর্মকান্ডের ক্ষেত্রে প্রয়োগ:</p>
+                    <p class="guideline-desc">[এই কর্মকান্ডটি কোন অন্তর্নিহিত নিয়মে operate করে?] (অপরিবর্তিত)</p>
+                </div>
+            </section>
+
+            <!-- 5 -->
+            <section>
+                <div class="section-header">
+                    <h2>5. Driving Mechanism-এর definition</h2>
+                    <button class="copy-btn" onclick="copySectionText(this)">কপি টেক্সট</button>
+                </div>
+                <div class="section-body">
+                    <p class="guideline-title">আলোচ্য কর্মকান্ডের ক্ষেত্রে প্রয়োগ:</p>
+                    <p class="guideline-desc">[কোন mechanism এই কর্মকান্ডের operation-কে চালিত করে?] (অপরিবর্তিত)</p>
+                </div>
+            </section>
+
+            <!-- 6 -->
+            <section>
+                <div class="section-header">
+                    <h2>6. Purpose-এর definition</h2>
+                    <button class="copy-btn" onclick="copySectionText(this)">কপি টেক্সট</button>
+                </div>
+                <div class="section-body">
+                    <p class="guideline-title">আলোচ্য কর্মকান্ডের ক্ষেত্রে প্রয়োগ:</p>
+                    <p class="guideline-desc">[এই কর্মকান্ডের fundamental direction/purpose কী?] Universal Harmony</p>
+                </div>
+            </section>
+
+            <!-- 7 -->
+            <section>
+                <div class="section-header">
+                    <h2>7. Imbalance-এর definition</h2>
+                    <button class="copy-btn" onclick="copySectionText(this)">কপি টেক্সট</button>
+                </div>
+                <div class="section-body">
+                    <p class="guideline-title">আলোচ্য কর্মকান্ডের ক্ষেত্রে প্রয়োগ:</p>
+                    <p class="guideline-desc">[এই কর্মকান্ডের ক্ষেত্রে কীভাবে imbalance তৈরি হতে পারে?] (অপরিবর্তিত)</p>
+                </div>
+            </section>
+
+            <!-- 8 -->
+            <section>
+                <div class="section-header">
+                    <h2>8. Resetting Effect-এর definition</h2>
+                    <button class="copy-btn" onclick="copySectionText(this)">কপি টেক্সট</button>
+                </div>
+                <div class="section-body">
+                    <p class="guideline-title">আলোচ্য কর্মকান্ডের ক্ষেত্রে প্রয়োগ:</p>
+                    <p class="guideline-desc">[এই কর্মকান্ডের কারণে Universal Harmony disturb হলে কী ধরনের consequence হতে পারে?] Resetting Effect-এর definition অপরিবর্তিত</p>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            Analysis Guidelines & Application | Unfold Actuality
+        </footer>
+    </div>
+
+    <script>
+        function copySectionText(button) {
+            const section = button.closest('section');
+            const body = section.querySelector('.section-body');
+            
+            // Text to copy (Heading + Body content)
+            const headingText = section.querySelector('h2').innerText;
+            const bodyText = body.innerText;
+            const fullText = headingText + "\n\n" + bodyText;
+
+            navigator.clipboard.writeText(fullText).then(() => {
+                const originalText = button.innerText;
+                button.innerText = 'কপি হয়েছে!';
+                button.classList.add('copied');
+                
+                setTimeout(() => {
+                    button.innerText = originalText;
+                    button.classList.remove('copied');
+                }, 2000);
+            }).catch(err => {
+                console.error('কপি করতে ব্যর্থ হয়েছে: ', err);
+            });
+        }
+    </script>
+</body>
+</html>
